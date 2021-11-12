@@ -1,0 +1,10 @@
+{
+    "Lua.diagnostics.globals": [
+        "Transform",
+        "init"
+    ],
+    "Lua.diagnostics.disable": [
+        "undefined-global",
+        "lowercase-global"
+    ]
+}
