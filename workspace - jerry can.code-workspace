@@ -7,5 +7,10 @@
 			"path": "..\\.utilities script"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"Lua.diagnostics.disable": [
+			"undefined-global",
+			"lowercase-global"
+		]
+	}
 }

@@ -21,7 +21,7 @@ Particles = {
     ---@param g any
     ---@param b any
     ---@param a any
-    ---@param emmis 
+    ---@param emmis any
     ---@param drag any
     ---@param tile any
     ---@param rad any
@@ -79,7 +79,7 @@ Particles = {
 Particles.presets = {
 
     default = {
-        stream = Particles.create(1,1,1,1, 1,1,1, 0.2,0,),
+        stream = Particles.create(1,1,1,1, 1,1,1, 0.2,0, 1),
     },
 
     gas = {

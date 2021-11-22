@@ -1,5 +1,5 @@
 local db = false
-local db = true
+-- local db = true
 
 function dbw(str, value) if db then DebugWatch(str, value) end end
 function dbp(str, newLine) if db then DebugPrint(str .. ternary(newLine, '\n', '')) print(str .. ternary(newLine, '\n', '')) end end

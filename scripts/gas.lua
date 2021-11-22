@@ -14,9 +14,12 @@ function Gas.run()
         -- Main stuff.
         Gas.drops.physics.process(drop)
         Gas.drops.burn.process(drop)
+        -- Gas.drops.burn.spreadFire()
+
 
         -- Visual effects.
-        DrawDot(drop.tr.pos, 0.2,0.2, drop.color[1],drop.color[2],drop.color[3], 1, false) -- Draw colored dot at drop pos.
+        Gas.drops.visuals.process(drop)
+        -- DrawDot(drop.tr.pos, 0.2,0.2, drop.color[1],drop.color[2],drop.color[3], 1, false) -- Draw colored dot at drop pos.
         -- DrawShapeOutline(drop.sticky.shape, 1,0.5,1, 1)
         -- DrawBodyOutline(GetShapeBody(drop.sticky.shape), 1,1,0, 0.5)
 
@@ -31,17 +34,17 @@ end
 
 
 
-
 Gas.drops.crud = {}
 
 --- Create a drop object and store it in the list of drops.
 function Gas.drops.crud.create(tr)
 
     local drop = {
+
         id = #Gas.dropsList + 1,
         removeDrop = false, -- true = mark drop for removal/deletion.
 
-        tr = tr or Transform(),
+        tr = tr,
         rad = 0.3,
 
         sticky = {
@@ -53,14 +56,21 @@ function Gas.drops.crud.create(tr)
         color = Vec(1,1,1), -- color
 
         burn = {
+            ignitionValid = false, -- Whether a drop is near fire. True = countdown then start burning.
             isBurning = false,
-            timer = {time = 0, rpm = 150}, -- Burns regardless of material type.
-            ignitionDistance = 3,
+            ignitionDistance = 2,
         },
+
+        timers = {
+            preBurn = {time = 0, rpm = 150}, -- Once drop is near fire, wait before igniting the drop.
+            burn = {time = 0, rpm = 150}, -- Burns regardless of material type.
+        }
 
     }
 
-    TimerResetTime(drop.burn.timer) -- Initialize time left.
+    -- Initialize time remaining.
+    TimerResetTime(drop.timers.preBurn)
+    TimerResetTime(drop.timers.burn)
 
     table.insert(Gas.dropsList, drop)
     dbp('Created drop. ' .. sfnTime())
@@ -223,24 +233,58 @@ Gas.drops.burn = {}
 --- Processes the burning of a drop.
 function Gas.drops.burn.process(drop)
 
-    if drop.burn.isBurning then -- Burning already started.
+    Gas.drops.burn.preBurn(drop)
+    Gas.drops.burn.burn(drop)
 
-        -- Drop is burning.
-        if drop.burn.timer.time > 0 then
+end
 
-            Gas.drops.burn.burnPosition(drop.tr.pos) -- Burn at drop pos.
-            TimerRunTime(drop.burn.timer) -- Consume the drop burn timer.
+--- Burns a position and applies visual effects. Does not ignite drops.
+function Gas.drops.burn.burnPosition(pos)
+    SpawnFire(pos)
+    SpawnParticle("darksmoke", pos, Vec(0,0.5,0), 0.5, 0.5, 0.5, 0.5)
+    SpawnParticle("darksmoke", pos, rdmVec(), 0.5, 0.5, 0.5, 0.5)
+end
 
-        -- Drop finished burning.
-        elseif drop.burn.timer.time <= 0 then
+-- Burn after preBurn timer.
+function Gas.drops.burn.burn(drop)
+
+    if drop.burn.isBurning then
+
+        local dropIsStillBurning = drop.timers.burn.time > 0
+        local dropFinishedBurning = drop.timers.burn.time <= 0
+
+        if dropIsStillBurning then
+
+            Gas.drops.burn.burnPosition(drop.tr.pos)
+            TimerRunTime(drop.timers.burn) -- Consume the drop burn timer.
+
+        elseif dropFinishedBurning then
 
             Gas.drops.crud.markDropForRemoval(drop) -- Delete drop.
 
         end
 
-    else -- Drop has not started burning yet.
+    end
+end
 
-        Gas.drops.burn.igniteDropsNearFire() -- Ignite the drop if it is near real fire or a burning drop.
+-- preBurn before burning.
+function Gas.drops.burn.preBurn(drop)
+
+
+    local fireIsClose = QueryClosestFire(drop.tr.pos, drop.burn.ignitionDistance)
+    if fireIsClose then
+        drop.burn.ignitionValid = true
+    end
+
+
+    if drop.burn.ignitionValid then -- Drop is near fire but the drop hasn't ignited yet.
+
+        TimerRunTime(drop.timers.preBurn)
+
+        if drop.timers.preBurn.time <= 0 then
+            drop.burn.isBurning = true
+            drop.burn.ignitionValid = false
+        end
 
     end
 
@@ -257,7 +301,7 @@ function Gas.drops.burn.spreadFire()
 
             if VecDist(drop, Gas.dropsList[j].tr.pos) < drop.burn.ignitionDistance then
 
-                -- Gas.drops.burn.igniteDrop(drop)
+                Gas.drops.burn.igniteDrop(drop)
                 return -- Single node of drops only.
 
             end
@@ -300,40 +344,26 @@ function Gas.drops.burn.igniteDropNearFire(drop)
 
 end
 
---- Burns a position and applies visual effects. Does not ignite drops.
-function Gas.drops.burn.burnPosition(pos)
-    SpawnFire(pos)
-    SpawnParticle("darksmoke", pos, Vec(0,0.5,0), 0.5, 0.5, 0.5, 0.5)
-    SpawnParticle("darksmoke", pos, rdmVec(), 0.5, 0.5, 0.5, 0.5)
+
+
+Gas.drops.visuals = {}
+
+function Gas.drops.visuals.process(drop)
+
+    ParticleReset()
+    ParticleType("smoke")
+    ParticleTile(4)
+    ParticleColor(0.8,0.8,0)
+    ParticleRadius(0.05)
+    ParticleAlpha(1)
+    ParticleGravity(0)
+    ParticleDrag(0)
+    ParticleEmissive(1)
+    ParticleRotation(0)
+    ParticleStretch(0)
+    ParticleSticky(0)
+    ParticleCollide(1)
+
+    SpawnParticle(drop.tr.pos, Vec(), 0.1)
+
 end
-
-
-
-
-
-
-
-
-
-
--- for i = 1, #Gas.dropsList do
-
---     local drop = Gas.dropsList[i] -- Current drop.
-
---     for j = 1, #Gas.dropsList do -- Drops to compare to current drop.
-
---         if Gas.dropsList[j] ~= drop then -- Don't compare drop to same drop.
-
---             local dropDist = VecDist(drop.tr.pos, Gas.dropsList[j].tr.pos) -- Dist from drop to other drop
-
---             if dropDist < drop.burn.ignitionDistance and Gas.dropsList[j].isBurning then
-
---                 Gas.drops.burn.setDropBurning(drop)
-
---             end
-
---         end
-
---     end
-
--- end
