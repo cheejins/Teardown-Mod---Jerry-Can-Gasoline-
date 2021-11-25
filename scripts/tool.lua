@@ -29,12 +29,7 @@ tool = {
 }
 
 
-
 function tool.run()
-
-    -- if tool.tool.input.didShoot() then -- Pressed Shoot.
-    --     dbp('SHOOTS GUN :O ', true)
-    -- end
 
     if tool.tool.input.isShooting() then -- Shooting.
         Gun.actions.shoot()
@@ -53,7 +48,6 @@ function tool.run()
     end
 
 end
-
 
 
 tool.draw = {}
