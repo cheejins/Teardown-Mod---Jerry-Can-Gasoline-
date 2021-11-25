@@ -29,11 +29,12 @@ tool = {
 }
 
 
+
 function tool.run()
 
-    if tool.tool.input.didShoot() then -- Pressed Shoot.
-        dbp('SHOOTS GUN :O ', true)
-    end
+    -- if tool.tool.input.didShoot() then -- Pressed Shoot.
+    --     dbp('SHOOTS GUN :O ', true)
+    -- end
 
     if tool.tool.input.isShooting() then -- Shooting.
         Gun.actions.shoot()
@@ -50,5 +51,34 @@ function tool.run()
     if tool.tool.input.didReleaseDrops() then
         Gun.actions.releaseDrops()
     end
+
+end
+
+
+
+tool.draw = {}
+
+function tool.draw.process()
+
+    if tool.tool.active() then
+        tool.draw.drawToolNameOptionsHint()
+    end
+
+end
+
+function tool.draw.drawToolNameOptionsHint()
+
+    UiPush()
+
+        UiTranslate(UiCenter(), UiHeight() - (addHeight or 56))
+
+        UiAlign("center middle")
+        UiFont("bold.ttf", 24)
+        UiTextShadow(0,0,0,1, 0.3, 0.5)
+        UiColor(1,1,1,1)
+
+        UiText('Press "ctrl + o" for options.',move)
+
+    UiPop()
 
 end

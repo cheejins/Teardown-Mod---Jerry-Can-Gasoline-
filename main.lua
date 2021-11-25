@@ -38,28 +38,22 @@ end
 
 function tick()
 
-    -- DEBUG
-    debugMod()
-
     runTimers()
-
     manageActiveProjs(projectiles)
 
     tool.run()
     Gas.run()
 
+
+    debugMod()
+
 end
 
+function draw()
 
--- every frame check next node of gasoline. control rate of spread this way.
--- grouped gasoline will make a web and explode quicker while lines of gasoline will be sequential and a bit slower.
+    tool.draw.process()
 
-
-
--- Gas visual type
-    -- option to choose between spray can and sprites
--- Check body mass change to readjust sticky gas points
-
+end
 
 
 UpdateQuickloadPatch()

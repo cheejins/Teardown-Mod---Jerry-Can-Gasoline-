@@ -12,7 +12,19 @@ function debugMod()
 end
 
 function debugGas()
+
     dbw('GAS #dropsList', #Gas.dropsList)
+
+    for i = 1, #Gas.dropsList do
+
+        local drop = Gas.dropsList[i]
+
+        -- DrawShapeOutline(drop.sticky.shape, 1,0.5,1, 1)
+        -- DrawBodyOutline(GetShapeBody(drop.sticky.shape), 1,1,0, 0.5)
+        -- dbl(GetShapeWorldTransform(drop.sticky.shape).pos, drop.tr.pos, 0,1,0.5, 1)
+
+    end
+
 end
 
 function debugTool()

@@ -16,20 +16,15 @@ function Gas.run()
         Gas.drops.burn.process(drop)
         -- Gas.drops.burn.spreadFire()
 
-
-        -- Visual effects.
-        Gas.drops.visuals.process(drop)
-        -- DrawDot(drop.tr.pos, 0.2,0.2, drop.color[1],drop.color[2],drop.color[3], 1, false) -- Draw colored dot at drop pos.
-        -- DrawShapeOutline(drop.sticky.shape, 1,0.5,1, 1)
-        -- DrawBodyOutline(GetShapeBody(drop.sticky.shape), 1,1,0, 0.5)
-
     end
+
+    -- Visual effects.
+    Gas.drops.effects.process()
 
     --> Safely delete specified drops.
     Gas.drops.crud.removeMarkedDrops()
 
 end
-
 
 
 
@@ -56,17 +51,25 @@ function Gas.drops.crud.create(tr)
         color = Vec(1,1,1), -- color
 
         burn = {
+            rad = 0.2, -- The radius the drop spawns fire.
             ignitionValid = false, -- Whether a drop is near fire. True = countdown then start burning.
             isBurning = false,
-            ignitionDistance = 2,
+            ignitionDistance = 2.2,
         },
 
         timers = {
-            preBurn = {time = 0, rpm = 150}, -- Once drop is near fire, wait before igniting the drop.
-            burn = {time = 0, rpm = 150}, -- Burns regardless of material type.
+            preBurn = {time = 0, rpm = 120}, -- Once drop is near fire, wait before igniting the drop.
+            burn = {time = 0, rpm = 60}, -- Burns regardless of material type.
         }
 
     }
+
+    -- Drop timer varience.
+    drop.timers.burn.rpm = drop.timers.burn.rpm * 1 + (-0.5 + rdm())
+    drop.timers.preBurn.rpm = drop.timers.preBurn.rpm * 1 + (-0.5 + rdm())
+
+    -- Drop ignition distance varience.
+    drop.burn.ignitionDistance = drop.burn.ignitionDistance * 1 + (-0.5 + rdm())
 
     -- Initialize time remaining.
     TimerResetTime(drop.timers.preBurn)
@@ -124,9 +127,9 @@ function Gas.drops.physics.process(drop)
         -- Place drop pos relative to shape sticky point.
         drop.tr.pos = TransformToParentPoint(GetShapeWorldTransform(drop.sticky.shape), drop.sticky.shapeRelativePos)
 
-        dbw('GAS drop pos ', drop.tr.pos)
-        dbw('GAS drop shape mass ' .. drop.id, drop.sticky.shapeMass)
-        dbw('GAS drop.sticky.shapeRelativePos', drop.sticky.shapeRelativePos)
+        -- dbw('GAS drop pos ', drop.tr.pos)
+        -- dbw('GAS drop shape mass ' .. drop.id, drop.sticky.shapeMass)
+        -- dbw('GAS drop.sticky.shapeRelativePos', drop.sticky.shapeRelativePos)
 
         -- PointLight(drop.tr.pos, 0,1,0.5, 1)
 
@@ -136,7 +139,6 @@ function Gas.drops.physics.process(drop)
     drop.sticky.shapeMass = GetBodyMass(GetShapeBody(drop.sticky.shape))
 
     -- Debug.
-    dbl(GetShapeWorldTransform(drop.sticky.shape).pos, drop.tr.pos, 0,1,0.5, 1)
     dbw('GAS drop '.. drop.id ..' mass ' .. drop.id, drop.sticky.shapeMass)
 
 end
@@ -171,36 +173,6 @@ end
 
 ---Check the surroundings of a drop and attach it to very close objects.
 function Gas.drops.physics.sticky.dripAndStick(drop)
-
-    -- dbp('Checking drop QCP ' .. sfnTime())
-
-    -- --> Check if drop is touching anything.
-    -- local a = 0.05
-    -- local queryPositions = {
-    --     VecAdd(drop.tr.pos, Vec(a,a,a)),
-    --     VecAdd(drop.tr.pos, Vec(-a,-a,-a))}
-
-    -- AabbDraw(queryPositions[1],queryPositions[2], 1,1,1, 1)
-
-    -- local shapeList = QueryAabbShapes(queryPositions[1], queryPositions[2])
-    -- if #shapeList <= 0 then
-
-    --     -- Set shape.
-    --     Gas.drops.physics.sticky.setShape(drop, shapeList[1])
-
-    --     drop.color = Vec(0,1,0)
-
-    -- else --> No hit.
-
-    --     -- Drip down.
-    --     drop.tr.pos = VecAdd(drop.tr.pos, Vec(0, -0.5, 0))
-
-    --     -- No shape.
-    --     Gas.drops.physics.sticky.resetShape(drop)
-
-    --     drop.color = Vec(1,0,0)
-
-    -- end
 
     --> Check if drop is touching anything.
     local dropRcHit, point, normal, dropRcShape = QueryClosestPoint(drop.tr.pos, 0.2)
@@ -241,8 +213,6 @@ end
 --- Burns a position and applies visual effects. Does not ignite drops.
 function Gas.drops.burn.burnPosition(pos)
     SpawnFire(pos)
-    SpawnParticle("darksmoke", pos, Vec(0,0.5,0), 0.5, 0.5, 0.5, 0.5)
-    SpawnParticle("darksmoke", pos, rdmVec(), 0.5, 0.5, 0.5, 0.5)
 end
 
 -- Burn after preBurn timer.
@@ -260,6 +230,7 @@ function Gas.drops.burn.burn(drop)
 
         elseif dropFinishedBurning then
 
+            MakeHole((drop.tr.pos), 0.3, 0.3, 0.3, 0.3)
             Gas.drops.crud.markDropForRemoval(drop) -- Delete drop.
 
         end
@@ -346,15 +317,43 @@ end
 
 
 
-Gas.drops.visuals = {}
 
-function Gas.drops.visuals.process(drop)
+Gas.drops.effects = {}
+
+function Gas.drops.effects.process()
+
+    -- Render drops.
+    for i = 1, #Gas.dropsList do
+
+        local drop = Gas.dropsList[i]
+
+        Gas.drops.effects.renderDropIdle(drop) -- Idle drop
+
+        if drop.burn.isBurning then
+            Gas.drops.effects.renderDropBurning(drop) -- Burning drop
+        end
+
+    end
+
+    -- Render drop projectiles.
+    for i = 1, #projectiles do
+
+        local proj = projectiles[i]
+        DrawDot(proj.transform.pos, 0.2,0.2, 0.7,0.9,0, 1) -- Drop projectile
+
+    end
+
+end
+
+function Gas.drops.effects.renderDropIdle(drop)
 
     ParticleReset()
+
+    -- Idle drop particles.
     ParticleType("smoke")
     ParticleTile(4)
     ParticleColor(0.8,0.8,0)
-    ParticleRadius(0.05)
+    ParticleRadius(0.08)
     ParticleAlpha(1)
     ParticleGravity(0)
     ParticleDrag(0)
@@ -362,8 +361,33 @@ function Gas.drops.visuals.process(drop)
     ParticleRotation(0)
     ParticleStretch(0)
     ParticleSticky(0)
-    ParticleCollide(1)
+    ParticleCollide(0)
 
-    SpawnParticle(drop.tr.pos, Vec(), 0.1)
+    SpawnParticle(drop.tr.pos, Vec(), 0.08)
+
+    DrawDot(drop.tr.pos, 0.2,0.2, 0.7,0.9,0, 1)
 
 end
+
+function Gas.drops.effects.renderDropBurning(drop)
+
+    ParticleReset()
+
+    -- Flame particles.
+    ParticleType("smoke")
+    ParticleColor(86.0,0.5,0.3, 0.76,0.25,0.1)
+    ParticleRadius(0.2, 0.5, "linear")
+    ParticleTile(5)
+    ParticleGravity(3)
+    ParticleEmissive(4.0, 1, "easein")
+    ParticleRotation(rdm(), 0, "linear")
+    ParticleStretch(5)
+    ParticleCollide(0.5)
+    SpawnParticle(drop.tr.pos, Vec(0, rdm(1,2), 0), 1)
+
+    -- Smoke particles
+    local smokePos = VecAdd(drop.tr.pos, Vec(0,math.random() + 0.5,0))
+    SpawnParticle("darksmoke", smokePos, Vec(0, rdm(0.5, 0), rdm(1,2), rdm(0.5,1)), 0.5, 0.5, 0.5, 0.5)
+
+end
+

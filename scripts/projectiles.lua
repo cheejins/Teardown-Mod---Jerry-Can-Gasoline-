@@ -80,8 +80,6 @@ function propelProj(proj)
     proj.transform.pos = TransformToParentPoint(proj.transform, Vec(0,0-proj.drop,-proj.speed))
     proj.drop = proj.drop + proj.dropIncrement
 
-    DrawDot(proj.transform.pos, 0.2,0.2, 0.7,0.9,0, 1)
-
 end
 
 projPresets = {
