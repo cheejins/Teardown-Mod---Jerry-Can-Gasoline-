@@ -2,8 +2,6 @@ Gas = {}
 Gas.drops = {} -- Holds common data for all drops.
 Gas.dropsList = {}
 
-
-
 function Gas.run()
 
     --> Process drops.

@@ -1,0 +1,4 @@
+name = Simple house
+author = Tuxedo Labs
+description = A simple house to showcase the editor
+

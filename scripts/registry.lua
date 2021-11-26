@@ -11,7 +11,6 @@ function modReset()
 
     regSetFloat('tool.tool.optionsKey'      , 'o')
 
-
 end
 
 function regGetFloat(path)

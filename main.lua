@@ -18,14 +18,17 @@
 CONFIG = {
     soundEnabled = true,
     slowMotion = false,
-    -- slowMotion = true,
 }
 
-
 function init()
+
+    checkRegInitialized()
+
     tool.tool.init()
     initTimers()
+    initProjectiles()
     UI_GAME = false
+
 end
 
 
@@ -36,11 +39,6 @@ function tick()
 
     tool.run()
     Gas.run()
-
-    if InputPressed('p') then
-        modReset()
-        buzz()
-    end
 
     debugMod()
 
@@ -55,6 +53,13 @@ function draw()
 
 end
 
-
+function checkRegInitialized()
+    local regInit = GetBool('savegame.mod.regInit')
+    if regInit == false then
+        modReset()
+        SetBool('savegame.mod.regInit', true)
+    end
+end
 
 UpdateQuickloadPatch()
+

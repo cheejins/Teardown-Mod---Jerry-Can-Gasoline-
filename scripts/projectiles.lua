@@ -2,6 +2,27 @@
 
 projectiles = {}
 
+function initProjectiles()
+    projPresets = {
+        jerryCan = {
+            isActive = true, -- Active when firing, inactive after hit.
+            hit = false,
+            lifeLength = 10, --Seconds
+    
+            speed = regGetFloat('tool.pour.velocity'),
+            drop = regGetFloat('tool.pour.velocity') * regGetFloat('tool.pour.gravity'),
+            dropIncrement = regGetFloat('tool.pour.gravity')/10,
+    
+            particle = 'smoke',
+            -- particlePreset = particlePresets.jerryCan,
+    
+            particleColor = Vec(1, 1, 1),
+            explosive = 0,
+            sound = nil,
+        },
+    }
+end
+
 --[[Projectiles]]
 function createProj(transform, projectiles, projPreset, ignoreBodies) --- Instantiates a proj and adds it to the projectiles table.
     local proj = TableClone(projPreset)
@@ -84,21 +105,3 @@ function propelProj(proj)
 
 end
 
-projPresets = {
-    jerryCan = {
-        isActive = true, -- Active when firing, inactive after hit.
-        hit = false,
-        lifeLength = 10, --Seconds
-
-        speed = regGetFloat('tool.pour.velocity'),
-        drop = regGetFloat('tool.pour.velocity') * regGetFloat('tool.pour.gravity'),
-        dropIncrement = regGetFloat('tool.pour.gravity')/10,
-
-        particle = 'smoke',
-        -- particlePreset = particlePresets.jerryCan,
-
-        particleColor = Vec(1, 1, 1),
-        explosive = 0,
-        sound = nil,
-    },
-}

@@ -6,6 +6,7 @@
 
 function init()
     UI_OPTIONS = true
+    checkRegInitialized()
 end
 
 function draw()
