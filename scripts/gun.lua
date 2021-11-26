@@ -30,10 +30,10 @@ Gun.actions = {
 
         createProj(toolTr, projectiles, projPresets.gasCan)
 
-        if rdm() < 0.2 / regGetFloat('tool.pour.rate') then
-            local pos = GetCameraTransform().pos
-            sounds.play.drop(pos, 2)
-        end
+        -- if rdm() < 0.2 / regGetFloat('tool.pour.rate') then
+        --     local pos = GetCameraTransform().pos
+        --     sounds.play.drop(pos, 2)
+        -- end
 
     end,
 
@@ -60,7 +60,7 @@ Gun.actions = {
         Gas.dropsList = {}
         projectiles = {}
         dbp('Thy drops hath been reset.' .. sfnTime(), true)
-        buzz()
+        beep()
     end,
 
     releaseDrops = function ()

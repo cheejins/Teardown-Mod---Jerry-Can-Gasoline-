@@ -264,7 +264,7 @@ options_tabs_render = {
 
             ui.padding.create(500, 20)
 
-            ui.slider.create('Minimum Ignition Distance', 'tool.gas.ignitionDistance', nil, 1, 3)
+            ui.slider.create('Minimum Ignition Distance', 'tool.gas.ignitionDistance', 'Meters', 1, 3)
             ui.padding.create(0, 64)
 
             ui.slider.create('Ignition Delay', 'tool.gas.preburnTime', 'Seconds', 0, 3)
