@@ -14,7 +14,6 @@ function Gas.run()
         -- Main stuff.
         Gas.drops.physics.process(drop)
         Gas.drops.burn.process(drop)
-        -- Gas.drops.burn.spreadFire()
 
     end
 
@@ -120,18 +119,10 @@ function Gas.drops.physics.process(drop)
 
         Gas.drops.physics.sticky.dripAndStick(drop) -- QCP right after shape breaks.
 
-        -- PointLight(drop.tr.pos, 1,0,0, 1)
-
     else -- Drop is stuck to a shape and did not break last frame.
 
         -- Place drop pos relative to shape sticky point.
         drop.tr.pos = TransformToParentPoint(GetShapeWorldTransform(drop.sticky.shape), drop.sticky.shapeRelativePos)
-
-        -- dbw('GAS drop pos ', drop.tr.pos)
-        -- dbw('GAS drop shape mass ' .. drop.id, drop.sticky.shapeMass)
-        -- dbw('GAS drop.sticky.shapeRelativePos', drop.sticky.shapeRelativePos)
-
-        -- PointLight(drop.tr.pos, 0,1,0.5, 1)
 
     end
 
@@ -294,33 +285,14 @@ function Gas.drops.burn.igniteDrop(drop)
     drop.burn.isBurning = true
 end
 
-function Gas.drops.burn.igniteDropsNearFire()
-
-    if timers.gas.spread.time <= 0 then
-        timers.gas.spread.time = 60/timers.gas.spread.rpm
-
-        for i = 1, #Gas.dropsList do
-            Gas.drops.burn.igniteDropNearFire(Gas.dropsList[i])
-        end
-    end
-
-end
-
-function Gas.drops.burn.igniteDropNearFire(drop)
-
-    --> Ignite nearby fires.
-    local fireIsClose = QueryClosestFire(drop.tr.pos, drop.burn.ignitionDistance)
-    if fireIsClose then
-
-        Gas.drops.burn.igniteDrop(drop)
-        drop.color = Vec(1,0.5,0)
-
-        -- Gas.drops.burn.burnPosition(drop.tr.pos)
-        Gas.drops.crud.markDropForRemoval(drop)
-
-    end
-
-end
+-- function Gas.drops.burn.projectiles()
+--     for i = 1, #projectiles do
+--         local fireIsClose = QueryClosestFire(projectiles[i].transform.pos, regGetFloat('tool.gas.ignitionDistance'))
+--         if fireIsClose then
+--             projectiles[i].hit = true
+--         end
+--     end
+-- end
 
 
 
@@ -334,10 +306,10 @@ function Gas.drops.effects.process()
 
         local drop = Gas.dropsList[i]
 
-        Gas.drops.effects.renderDropIdle(drop) -- Idle drop
+        Gas.drops.effects.renderDropIdle(drop.tr.pos) -- Idle drop
 
         if drop.burn.isBurning then
-            Gas.drops.effects.renderDropBurning(drop) -- Burning drop
+            Gas.drops.effects.renderDropBurning(drop.tr.pos) -- Burning drop
         end
 
     end
@@ -352,7 +324,7 @@ function Gas.drops.effects.process()
 
 end
 
-function Gas.drops.effects.renderDropIdle(drop)
+function Gas.drops.effects.renderDropIdle(pos)
 
     ParticleReset()
 
@@ -370,13 +342,13 @@ function Gas.drops.effects.renderDropIdle(drop)
     ParticleSticky(0)
     ParticleCollide(0)
 
-    SpawnParticle(drop.tr.pos, Vec(), 0.08)
+    SpawnParticle(pos, Vec(), 0.08)
 
-    DrawDot(drop.tr.pos, 0.2,0.2, 0.7,0.9,0, 1)
+    DrawDot(pos, 0.2,0.2, 0.7,0.9,0, 1)
 
 end
 
-function Gas.drops.effects.renderDropBurning(drop)
+function Gas.drops.effects.renderDropBurning(pos)
 
     ParticleReset()
 
@@ -390,10 +362,10 @@ function Gas.drops.effects.renderDropBurning(drop)
     ParticleRotation(rdm(), 0, "linear")
     ParticleStretch(5)
     ParticleCollide(0.5)
-    SpawnParticle(drop.tr.pos, Vec(0, 0, 0), 1)
+    SpawnParticle(pos, Vec(0, 0, 0), 1)
 
     -- Smoke particles
-    local smokePos = VecAdd(drop.tr.pos, Vec(0,math.random() + 0.5,0))
+    local smokePos = VecAdd(pos, Vec(0,math.random() + 0.5,0))
     SpawnParticle("darksmoke", smokePos, Vec(0, rdm(2, 3), rdm(1,2), rdm(0.5,1)), 0.5, 0.5, 0.5, 0.5)
 
 end

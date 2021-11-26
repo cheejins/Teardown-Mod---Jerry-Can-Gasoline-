@@ -1,7 +1,7 @@
-name = Jerry Can
+name = Jerry Can (Gasoline)
 author = Cheejins
-description =
-tags =
+description = [noupload]Go to the mod's options to play the demo map.
+tags = Map, Tool
 
 # Available tags (comma-separated):
 # Map      - A custom map with no particular gameplay

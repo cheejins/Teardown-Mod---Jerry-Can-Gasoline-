@@ -7,10 +7,12 @@
 #include "scripts/sound.lua"
 #include "scripts/tool.lua"
 #include "scripts/umf.lua"
+#include "scripts/ui.lua"
 #include "scripts/utility.lua"
 
 ------------------------------------------------
---- This script manages the entire mod (woah).
+--- Jerry Can (Gasoline)
+--- By: Cheejins
 ------------------------------------------------
 
 CONFIG = {
@@ -23,6 +25,7 @@ CONFIG = {
 function init()
     tool.tool.init()
     initTimers()
+    UI_GAME = false
 end
 
 
@@ -45,9 +48,13 @@ end
 
 function draw()
 
-    tool.draw.process()
+    if tool.tool.active() then
+        uiDrawToolNameOptionsHint()
+    end
+    uiManageGameOptions()
 
 end
+
 
 
 UpdateQuickloadPatch()

@@ -1,7 +1,6 @@
 timers = {}
 timer = {time, rpm}
 
-
 -- Timers that count down constantly.
 function runTimers()
     TimerRunTime(timers.gun.shoot)
@@ -9,10 +8,6 @@ function runTimers()
 end
 
 function initTimers()
-    -- timers.gun = { shoot = { time = 0, rpm = 60*regGetFloat('tool.gas.burnTime') } }
     timers.gun = { shoot = { time = 0, rpm = regGetFloat('tool.pour.rate') } }
     timers.gas = { spread = { time = 0, rpm = 150 } }
 end
-
-
--- TimerAddTimer(timers.gun, time, rpm)

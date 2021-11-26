@@ -32,11 +32,9 @@ Gun.actions = {
         if hit then
             -- Spawn a fire at the position of the drop.
             Gas.drops.burn.burnPosition(pos)
-
-            --- Query closest drop and burn it.
-            -- Spawn a burning drop of gas.
-            -- Gas.drops.crud.create(GetCameraTransform())
-            -- Gas.drops.burn.igniteDrop(Gas.dropsList[#Gas.dropsList])
+            Gas.drops.effects.renderDropBurning(pos)
+            Gas.drops.effects.renderDropBurning(pos)
+            Gas.drops.effects.renderDropBurning(pos)
         end
 
     end,
