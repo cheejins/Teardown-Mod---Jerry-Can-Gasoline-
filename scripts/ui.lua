@@ -110,25 +110,28 @@ function uiDrawTitleContainer()
         local btnW = 128 - (padW*3)
         local btnH = 128
 
+        UiAlign('left top')
+
         -- Exit button
         UiColor(1,0,0,1)
         UiRect(btnW, btnH)
 
-        -- X text
-        UiColor(1,1,1, 1)
-        UiFont('bold.ttf', btnW/1.5)
-        UiAlign('middle center')
-        ui.padding.create(btnW/2, btnH/2)
-
-        -- Button function
-        local exitButton = UiTextButton('X', btnW, btnH)
-        if exitButton then
+        UiButtonImageBox('ui/common/box-outline-6.png', 1,1, 0,0,0, a)
+        if UiBlankButton(btnW, btnH) then
             if UI_GAME then
                 UI_GAME = false
             elseif UI_OPTIONS then
                 Menu()
             end
         end
+
+        -- X text
+        UiColor(1,1,1, 1)
+        ui.padding.create(btnW/2, btnH/2)
+        UiFont('bold.ttf', btnW/1.5)
+        UiAlign('middle center')
+        UiText('X')
+
 
     UiPop() end
 
@@ -177,6 +180,7 @@ function uiDrawOptionsContainer()
         local resetButton = UiTextButton('Reset')
         if resetButton then
             modReset()
+            beep()
         end
 
     UiPop() end
@@ -272,7 +276,7 @@ options_tabs_render = {
 
             ui.slider.create('Burn Duration', 'tool.gas.burnTime', 'Seconds', 0, 60)
             ui.padding.create(0, 64)
-  
+
             ui.slider.create('Burn Thickness', 'tool.gas.burnThickness', 'Meters', 0, 4)
             ui.padding.create(0, 64)
 
@@ -398,10 +402,20 @@ function ui.tabView.tab.create(text)
 
     do UiPush()
 
+        UiAlign('top left')
+
         ui.container.create(options_tabW - padW, options_tabH, ui.colors.g1, 1)
 
         if options_tabSelected == text then
             ui.container.create(options_tabW - padW, options_tabH, ui.colors.g3, 1)
+        end
+
+        UiButtonImageBox('ui/common/box-outline-6.png', 1,1, 0,0,0, a)
+        if UiBlankButton(options_tabW, options_tabH) then
+            if options_tabSelected ~= text then
+                PlaySound(LoadSound('clickdown.ogg'), GetCameraTransform().pos, 1)
+            end
+            options_tabSelected = text
         end
 
         ui.padding.create(options_tabW/2, options_tabH/2)
@@ -409,11 +423,7 @@ function ui.tabView.tab.create(text)
         UiColor(1,1,1, 1)
         UiFont('bold.ttf', font_normal*1.25)
         UiAlign('center middle')
-
-        local pressed = UiTextButton(text, 100, 100)
-        if pressed then
-            options_tabSelected = text
-        end
+        UiText(text)
 
     UiPop() end
 
@@ -513,8 +523,9 @@ function ui.checkBox.create(title, registryPath)
     UiPop() end
 
     UiButtonImageBox('ui/common/box-outline-6.png', 10,10, 0,0,0, a)
-    if UiBlankButton(150, 50) then
+    if UiBlankButton(tglW, tglH) then
         SetBool('savegame.mod.' .. registryPath, not value)
+        PlaySound(LoadSound('clickdown.ogg'), GetCameraTransform().pos, 1)
     end
 
 end

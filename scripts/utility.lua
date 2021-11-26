@@ -214,10 +214,12 @@
     local debugSounds = {
         beep = LoadSound("warning-beep"),
         buzz = LoadSound("light/spark0"),
-        chime = LoadSound("elevator-chime"),}
+        chime = LoadSound("elevator-chime"),
+        valu = LoadSound("valuable.ogg"),}
     function beep(pos, vol) PlaySound(debugSounds.beep, pos or GetCameraTransform().pos, vol or 0.3) end
     function buzz(pos, vol) PlaySound(debugSounds.buzz, pos or GetCameraTransform().pos, vol or 0.3) end
     function chime(pos, vol) PlaySound(debugSounds.chime, pos or GetCameraTransform().pos, vol or 0.3) end
+    function valu(pos, vol) PlaySound(debugSounds.valu, pos or GetCameraTransform().pos, vol or 0.3) end
 
 
 
