@@ -1,5 +1,7 @@
 #include "scripts/umf.lua"
+#include "scripts/registry.lua"
 #include "scripts/utility.lua"
+
 
 -- Please don't judge this code too heavily. It is a bit of a hack job but it works :)
 
@@ -143,7 +145,7 @@ function ui.slider.create(title, registryPath, valueText, min, max, w, h, fontSi
     do UiPush()
         UiAlign('left middle')
         ui.padding.create(slW + 20, 0)
-        UiText(sfn((value/slW) * (max-min) + min, 1) .. ' ' .. (valueText or ''))
+        UiText(sfn((value/slW) * (max-min) + min, 3) .. ' ' .. (valueText or ''))
     UiPop() end
 
 end
@@ -239,14 +241,19 @@ function uiDrawOptions()
     UiPop() end
 
 
-    -- -- Button: Options reset
-    -- do UiPush()
-    --     ui.padding.create(contW - padW * 4, ((font_heading - font_normal * 1.5)/2))
-    --     UiColor(1,1,1, 1)
-    --     UiFont('bold.ttf', font_normal * 1.5)
-    --     UiAlign('top right')
-    --     UiText('Reset')
-    -- UiPop() end
+    -- Button: Options reset
+    do UiPush()
+        ui.padding.create(contW - padW * 4, ((font_heading - font_normal * 1.5)/2))
+        UiColor(1,1,1, 1)
+        UiFont('bold.ttf', font_normal * 1.5)
+        UiAlign('top right')
+
+        local resetButton = UiTextButton('Reset', 100, 200)
+        if resetButton then
+            modReset()
+        end
+
+    UiPop() end
 
 
     -- Options tabs
@@ -308,16 +315,16 @@ options_tabs_render = {
 
         do UiPush()
 
-            ui.slider.create('Pour Gravity', 'tool.pour.gravity', nil, 0, 10)
+            ui.slider.create('Pour Gravity', 'tool.pour.gravity', nil, 0, 0.1)
             ui.padding.create(0, 64)
 
-            ui.slider.create('Pour Rate (Drops per second)', 'tool.pour.rate', 'RPM', 120, 2400)
+            ui.slider.create('Pour RPM (Drops per second)', 'tool.pour.rate', 'RPM', 120, 2400)
             ui.padding.create(0, 64)
 
-            ui.slider.create('Pour Velocity', 'tool.pour.velocity', 'm/s', 0.5, 100)
+            ui.slider.create('Pour Velocity', 'tool.pour.velocity', 'm/s', 0.01, 0.5)
             ui.padding.create(0, 64)
 
-            ui.slider.create('Pour Spread', 'tool.pour.spread', nil, 0, 10)
+            ui.slider.create('Pour Spread', 'tool.pour.spread', nil, 0, 20)
             ui.padding.create(0, 64)
 
 
@@ -329,10 +336,13 @@ options_tabs_render = {
 
         do UiPush()
 
-            ui.slider.create('Combustion distance', 'tool.gas.gravity')
+            ui.slider.create('Combustion distance', 'tool.gas.ignitionDistance', nil, 1, 3)
             ui.padding.create(0, 64)
 
-            ui.slider.create('Time before igniting', 'tool.gas.preburnTime', 'Seconds', 0, 10)
+            ui.slider.create('Time before igniting', 'tool.gas.preburnTime', 'Seconds', 0, 3)
+            ui.padding.create(0, 64)
+
+            ui.slider.create('Burn duration', 'tool.gas.burnTime', 'Seconds', 0, 60)
             ui.padding.create(0, 64)
 
             ui.slider.create('Destructive Fire', 'tool.gas.destructive')

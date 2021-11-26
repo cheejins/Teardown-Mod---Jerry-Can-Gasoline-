@@ -14,8 +14,13 @@ Gun.actions = {
         local toolTr = TransformCopy(GetBodyTransform(GetToolBody()))
         toolTr.pos = TransformToParentPoint(toolTr, Vec(0.7,0.2,-1))
 
-        local spreadMult = math.random(3,8)
-        toolTr.rot = QuatRotateQuat(toolTr.rot, QuatEuler(math.random()*spreadMult,math.random()*spreadMult,math.random()*spreadMult))
+        local spreadMult = math.random(0, regGetFloat('tool.pour.spread'))
+        toolTr.rot = QuatRotateQuat(
+            toolTr.rot, 
+            QuatEuler(
+                math.random()*spreadMult,
+                math.random()*spreadMult,
+                math.random()*spreadMult))
 
         createProj(toolTr, projectiles, projPresets.jerryCan)
 

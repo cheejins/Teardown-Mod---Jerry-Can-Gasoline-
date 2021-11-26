@@ -2,6 +2,7 @@
 #include "scripts/gas.lua"
 #include "scripts/gun.lua"
 #include "scripts/projectiles.lua"
+#include "scripts/registry.lua"
 #include "scripts/timers.lua"
 #include "scripts/sound.lua"
 #include "scripts/tool.lua"
@@ -19,20 +20,9 @@ CONFIG = {
 }
 
 
-REG = {
-    -- gas
-        -- pour
-            -- rate
-            -- spread
-        -- fire
-            -- spread
-                -- rate
-                -- efficiency
-}
-
-
 function init()
     tool.tool.init()
+    initTimers()
 end
 
 
@@ -44,6 +34,10 @@ function tick()
     tool.run()
     Gas.run()
 
+    if InputPressed('p') then
+        modReset()
+        buzz()
+    end
 
     debugMod()
 

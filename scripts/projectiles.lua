@@ -1,3 +1,5 @@
+#include "registry.lua"
+
 projectiles = {}
 
 --[[Projectiles]]
@@ -88,9 +90,9 @@ projPresets = {
         hit = false,
         lifeLength = 10, --Seconds
 
-        speed = 0.3,
-        drop = 0.02,
-        dropIncrement = 0.001,
+        speed = regGetFloat('tool.pour.velocity'),
+        drop = regGetFloat('tool.pour.velocity') * regGetFloat('tool.pour.gravity'),
+        dropIncrement = regGetFloat('tool.pour.gravity')/10,
 
         particle = 'smoke',
         -- particlePreset = particlePresets.jerryCan,

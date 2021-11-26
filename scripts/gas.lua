@@ -40,7 +40,7 @@ function Gas.drops.crud.create(tr)
         removeDrop = false, -- true = mark drop for removal/deletion.
 
         tr = tr,
-        rad = 0.3,
+        rad = 0.2,
 
         sticky = {
             shape = nil,
@@ -54,12 +54,12 @@ function Gas.drops.crud.create(tr)
             rad = 0.2, -- The radius the drop spawns fire.
             ignitionValid = false, -- Whether a drop is near fire. True = countdown then start burning.
             isBurning = false,
-            ignitionDistance = 2.2,
+            ignitionDistance = regGetFloat('tool.gas.ignitionDistance'),
         },
 
         timers = {
-            preBurn = {time = 0, rpm = 120}, -- Once drop is near fire, wait before igniting the drop.
-            burn = {time = 0, rpm = 60}, -- Burns regardless of material type.
+            preBurn =   {time = 0, rpm = 60 / regGetFloat('tool.gas.preburnTime')}, -- Once drop is near fire, wait before igniting the drop.
+            burn =      {time = 0, rpm = 60 / regGetFloat('tool.gas.burnTime')}, -- Burns regardless of material type.
         }
 
     }
@@ -230,8 +230,15 @@ function Gas.drops.burn.burn(drop)
 
         elseif dropFinishedBurning then
 
-            MakeHole((drop.tr.pos), 0.3, 0.3, 0.3, 0.3)
             Gas.drops.crud.markDropForRemoval(drop) -- Delete drop.
+
+            if rdm() < 0.75 then
+                local rdmPos = Vec(
+                    (rdm() - 0.5)/2,
+                    (rdm() - 0.5)/2,
+                    (rdm() - 0.5)/2)
+                MakeHole((VecAdd(drop.tr.pos, rdmPos)), 0.1, 0.1, 0.1, 0.1)
+            end
 
         end
 
@@ -378,16 +385,15 @@ function Gas.drops.effects.renderDropBurning(drop)
     ParticleColor(86.0,0.5,0.3, 0.76,0.25,0.1)
     ParticleRadius(0.2, 0.5, "linear")
     ParticleTile(5)
-    ParticleGravity(3)
+    ParticleGravity(0.5)
     ParticleEmissive(4.0, 1, "easein")
     ParticleRotation(rdm(), 0, "linear")
     ParticleStretch(5)
     ParticleCollide(0.5)
-    SpawnParticle(drop.tr.pos, Vec(0, rdm(1,2), 0), 1)
+    SpawnParticle(drop.tr.pos, Vec(0, 0, 0), 1)
 
     -- Smoke particles
     local smokePos = VecAdd(drop.tr.pos, Vec(0,math.random() + 0.5,0))
-    SpawnParticle("darksmoke", smokePos, Vec(0, rdm(0.5, 0), rdm(1,2), rdm(0.5,1)), 0.5, 0.5, 0.5, 0.5)
+    SpawnParticle("darksmoke", smokePos, Vec(0, rdm(2, 3), rdm(1,2), rdm(0.5,1)), 0.5, 0.5, 0.5, 0.5)
 
 end
-
