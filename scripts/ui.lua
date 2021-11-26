@@ -80,7 +80,7 @@ function uiDrawTitleContainer()
     -- Button: Play Demo Map
     do UiPush()
 
-        ui.padding.create(contW - title_w - padW2 , padH*3)
+        ui.padding.create(contW - title_w - padW , padH)
 
         local a = 1
 
@@ -96,7 +96,6 @@ function uiDrawTitleContainer()
         if UiTextButton('Play Demo Map', 440,70) then
             StartLevel("", "MOD/demoMap/main.xml")
         end
-
 
     UiPop() end
 
@@ -258,6 +257,9 @@ options_tabs_render = {
             ui.slider.create('Pour Spread', 'tool.pour.spread', nil, 0, 20)
             ui.padding.create(0, 64)
 
+            ui.checkBox.create('Debug Mode', 'tool.debugMode')
+            ui.padding.create(0, 64)
+
         UiPop() end
 
     end,
@@ -330,6 +332,7 @@ options_tabs_render = {
 
 
 
+--- Draw options shorcut key hint above tool name.
 function uiDrawToolNameOptionsHint(addHeight)
 
     UiPush()
@@ -347,6 +350,7 @@ function uiDrawToolNameOptionsHint(addHeight)
 
 end
 
+--- Manage when to open and close the options menu.
 function uiManageGameOptions()
 
     if tool.tool.active() then

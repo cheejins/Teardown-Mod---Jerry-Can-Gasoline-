@@ -25,13 +25,12 @@ function init()
     UI_GAME = false
     checkRegInitialized()
 
+    initDebug()
     initSounds()
 
     tool.tool.init()
     initTimers()
     initProjectiles()
-
-
 
 end
 
