@@ -68,10 +68,10 @@ function tool.draw.drawToolNameOptionsHint()
 
         UiAlign("center middle")
         UiFont("bold.ttf", 24)
-        UiTextShadow(0,0,0,1, 0.3, 0.5)
-        UiColor(1,1,1,1)
+        UiTextShadow(0,0,0, 1, 0.3, 0.5)
+        UiColor(1,1,1, 1)
 
-        UiText('Press "ctrl + o" for options.',move)
+        UiText('Press "ctrl + o" for options.')
 
     UiPop()
 

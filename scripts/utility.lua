@@ -281,5 +281,3 @@
     function TimerResetTime(timer)
         timer.time = 60/timer.rpm
     end
-
-

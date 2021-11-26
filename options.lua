@@ -43,8 +43,8 @@ function draw()
 end
 
 
-ui = {}
 
+ui = {}
 
 ui.colors = {
     white = Vec(1,1,1),
@@ -53,6 +53,7 @@ ui.colors = {
     g1 = Vec(0.2,0.2,0.2),
     black = Vec(0,0,0),
 }
+
 
 
 ui.container = {}
@@ -64,11 +65,13 @@ function ui.container.create(w, h, c, a)
 end
 
 
+
 ui.padding = {}
 
 function ui.padding.create(w, h)
     UiTranslate(w or 10, h or 10)
 end
+
 
 
 ui.tabView = {}
@@ -101,14 +104,15 @@ function ui.tabView.tab.create(text)
 end
 
 
+
 ui.slider = {}
 
-function ui.slider.create(title, registryPath, min, max, w, h, fontSize, axis)
+function ui.slider.create(title, registryPath, valueText, min, max, w, h, fontSize, axis)
 
     local value = GetFloat('savegame.mod.' .. registryPath)
 
     min = min or 0
-    max = max or 100
+    max = max or 300
 
     UiAlign('left middle')
 
@@ -116,27 +120,30 @@ function ui.slider.create(title, registryPath, min, max, w, h, fontSize, axis)
     UiColor(1,1,1, 1)
     UiFont('regular.ttf', fontSize or font_normal)
     UiText(title)
-    ui.padding.create(padW, fontSize or font_normal)
+    ui.padding.create(0, fontSize or font_normal)
 
     -- Slider BG
-    UiColor(0.3,0.3,0.3, 1)
+    UiColor(0.4,0.4,0.4, 1)
     local slW = w or 300
     UiRect(slW, h or 10)
 
+    -- Convert to slider scale.
+    value = ((value-min) / (max-min)) * slW
+
     -- Slider dot
-    UiColor(1, 1, 1, 1)
+    UiColor(1,1,1, 1)
     UiAlign('center middle')
     value, done = UiSlider("ui/common/dot.png", "x", value, 0, slW)
     if done then
-        beep(0)
-        SetFloat('savegame.mod.' .. registryPath, value)
+        local val = (value/slW) * (max-min) + min -- Convert to true scale.
+        SetFloat('savegame.mod.' .. registryPath, val)
     end
 
     -- Slider value
     do UiPush()
         UiAlign('left middle')
         ui.padding.create(slW + 20, 0)
-        UiText(sfn(value, 1))
+        UiText(sfn((value/slW) * (max-min) + min, 1) .. ' ' .. (valueText or ''))
     UiPop() end
 
 end
@@ -301,41 +308,38 @@ options_tabs_render = {
 
         do UiPush()
 
-            ui.slider.create('Pour Gravity', 'tool.pour.gravity')
+            ui.slider.create('Pour Gravity', 'tool.pour.gravity', nil, 0, 10)
+            ui.padding.create(0, 64)
 
-            -- UiAlign('left middle')
+            ui.slider.create('Pour Rate (Drops per second)', 'tool.pour.rate', 'RPM', 120, 2400)
+            ui.padding.create(0, 64)
 
-            -- -- Text header
-            -- UiColor(1,1,1, 1)
-            -- UiFont('regular.ttf', font_normal)
-            -- UiText('hi')
-            -- ui.padding.create(padW, font_normal)
+            ui.slider.create('Pour Velocity', 'tool.pour.velocity', 'm/s', 0.5, 100)
+            ui.padding.create(0, 64)
 
-            -- -- Slider BG
-            -- UiColor(0.3,0.3,0.3, 1)
-            -- local slW = 300
-            -- UiRect(slW, 10)
+            ui.slider.create('Pour Spread', 'tool.pour.spread', nil, 0, 10)
+            ui.padding.create(0, 64)
 
-            -- -- Slider dot
-            -- UiColor(1, 1, 1, 1)
-            -- UiAlign('center middle')
-            -- value, done = UiSlider("ui/common/dot.png", "x", value, 0, slW)
-            -- if done then
-            --     beep(0)
-            -- end
-
-            -- -- Slider value
-            -- do UiPush()
-            --     UiAlign('left middle')
-            --     ui.padding.create(slW + 20, 0)
-            --     UiText(sfn(value))
-            -- UiPop() end
 
         UiPop() end
 
     end,
 
     Gas = function()
+
+        do UiPush()
+
+            ui.slider.create('Combustion distance', 'tool.gas.gravity')
+            ui.padding.create(0, 64)
+
+            ui.slider.create('Time before igniting', 'tool.gas.preburnTime', 'Seconds', 0, 10)
+            ui.padding.create(0, 64)
+
+            ui.slider.create('Destructive Fire', 'tool.gas.destructive')
+            ui.padding.create(0, 64)
+
+        UiPop() end
+
     end,
 
     Performance = function()
