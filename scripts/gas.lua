@@ -79,6 +79,19 @@ function Gas.drops.crud.create(tr)
 
 end
 
+--- Spawn a drop into the world.
+function Gas.drops.crud.spawn(pos)
+
+    Gas.drops.crud.create(Transform(pos, QuatEuler(0,0,0)))
+
+    if rdm() < 0.1 / regGetFloat('tool.pour.rate') then
+        sounds.play.drop(pos, 2)
+    end
+
+    SpawnParticle("smoke", pos, Vec(0,0,0), 0.5, 0.5, 0.5, 0.5)
+
+end
+
 --- Mark a drop for removal to safely remove it near the end of the frame.
 function Gas.drops.crud.markDropForRemoval(drop)
     drop.removeDrop = true

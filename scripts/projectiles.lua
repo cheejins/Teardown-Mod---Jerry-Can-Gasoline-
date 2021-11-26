@@ -80,8 +80,7 @@ function propelProj(proj)
         local hitPos = TransformToParentPoint(proj.transform, Vec(0,0,dist))
         proj.hit = true
 
-        Gas.drops.crud.create(Transform(hitPos, QuatEuler(0,0,0)))
-        SpawnParticle("smoke", proj.transform.pos, Vec(0,0,0), 0.5, 0.5, 0.5, 0.5)
+        Gas.drops.crud.spawn(hitPos)
 
     end
 

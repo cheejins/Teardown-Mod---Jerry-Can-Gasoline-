@@ -240,6 +240,8 @@ options_tabs_render = {
 
         do UiPush()
 
+            ui.padding.create(500, 20)
+
             ui.slider.create('Pour Gravity', 'tool.pour.gravity', nil, 0, 0.1)
             ui.padding.create(0, 64)
 
@@ -260,6 +262,8 @@ options_tabs_render = {
 
         do UiPush()
 
+            ui.padding.create(500, 20)
+
             ui.slider.create('Minimum Ignition Distance', 'tool.gas.ignitionDistance', nil, 1, 3)
             ui.padding.create(0, 64)
 
@@ -272,7 +276,7 @@ options_tabs_render = {
             ui.slider.create('Burn Thickness', 'tool.gas.burnThickness', 'Meters', 0, 4)
             ui.padding.create(0, 64)
 
-            ui.checkBox.create('Gas-Covered Vehicles Become Explosive', 'tool.gas.explosiveVehicles')
+            ui.checkBox.create('Gas-covered vehicles become explosive', 'tool.gas.explosiveVehicles')
             ui.padding.create(0, 64)
 
         UiPop() end
@@ -436,7 +440,7 @@ function ui.slider.create(title, registryPath, valueText, min, max, w, h, fontSi
 
     -- Slider BG
     UiColor(0.4,0.4,0.4, 1)
-    local slW = w or 400
+    local slW = w or 500
     UiRect(slW, h or 10)
 
     -- Convert to slider scale.
@@ -455,7 +459,8 @@ function ui.slider.create(title, registryPath, valueText, min, max, w, h, fontSi
     do UiPush()
         UiAlign('left middle')
         ui.padding.create(slW + 20, 0)
-        UiText(sfn((value/slW) * (max-min) + min, 3) .. ' ' .. (valueText or ''))
+        local decimals = ternary((value/slW) * (max-min) + min < 100, 3, 1)
+        UiText(sfn((value/slW) * (max-min) + min, decimals) .. ' ' .. (valueText or ''))
     UiPop() end
 
 end
@@ -510,8 +515,6 @@ function ui.checkBox.create(title, registryPath)
     UiButtonImageBox('ui/common/box-outline-6.png', 10,10, 0,0,0, a)
     if UiBlankButton(150, 50) then
         SetBool('savegame.mod.' .. registryPath, not value)
-
-        DebugPrint(GetBool('savegame.mod.' .. registryPath))
     end
 
 end

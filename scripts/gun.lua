@@ -3,10 +3,16 @@ Gun = {}
 Gun.actions = {
 
     shoot = function()
-        TimerRunTimer(timers.gun.shoot, {
-            -- Functions to call.
-            Gun.actions.createShot,
-        }, false)
+
+        if not UI_GAME then
+            TimerRunTimer(timers.gun.shoot, {
+                -- Functions to call.
+                Gun.actions.createShot,
+            }, false)
+        end
+
+        -- sounds.play.pour(GetCameraTransform().pos, 2)
+
     end,
 
     -- Creates a drop projectile.
@@ -23,6 +29,11 @@ Gun.actions = {
                 math.random()*spreadMult))
 
         createProj(toolTr, projectiles, projPresets.gasCan)
+
+        if rdm() < 0.2 / regGetFloat('tool.pour.rate') then
+            local pos = GetCameraTransform().pos
+            sounds.play.drop(pos, 2)
+        end
 
     end,
 

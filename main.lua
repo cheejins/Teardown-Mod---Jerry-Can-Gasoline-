@@ -22,12 +22,16 @@ CONFIG = {
 
 function init()
 
+    UI_GAME = false
     checkRegInitialized()
+
+    initSounds()
 
     tool.tool.init()
     initTimers()
     initProjectiles()
-    UI_GAME = false
+
+
 
 end
 

@@ -6,7 +6,7 @@ function modReset()
     regSetFloat('tool.pour.velocity'        , 0.2)
 
     regSetFloat('tool.gas.burnTime'         , 2)
-    regSetFloat('tool.gas.burnThickness'    , 0.9)
+    regSetFloat('tool.gas.burnThickness'    , 0.5)
     regSetFloat('tool.gas.ignitionDistance' , 2.2)
     regSetFloat('tool.gas.preburnTime'      , 0.5)
     SetBool('tool.gas.explosiveVehicles'    , true)
