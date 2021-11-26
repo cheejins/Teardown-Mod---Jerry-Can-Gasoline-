@@ -9,7 +9,7 @@ function modReset()
     regSetFloat('tool.gas.burnThickness'    , 0.5)
     regSetFloat('tool.gas.ignitionDistance' , 2.2)
     regSetFloat('tool.gas.preburnTime'      , 0.65)
-    regSetBool('tool.gas.explosiveVehicles'    , true)
+    regSetBool('tool.gas.explosiveVehicles' , true)
 
     regSetFloat('tool.tool.optionsKey'      , 'o')
     regSetBool('tool.debugMode'             , false)

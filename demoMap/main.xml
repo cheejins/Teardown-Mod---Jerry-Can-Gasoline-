@@ -1,68 +1,9 @@
 <scene id_="1307391872" open_="true" version="0.8.0" shadowVolume="200 20 200">
-	<group id_="1445419136" name="Script">
-		<script id_="812630464" file="MOD/demoMap/main.lua"/>
-		<script id_="1126239360" file="sandbox.lua"/>
-	</group>
 	<group id_="2063264768" open_="true" name="Scene">
-		<group id_="2101867776" open_="true" name="Ground" pos="-0.00001 0.0 -0.0">
+		<group id_="2101867776" name="Ground" pos="-0.00001 0.0 -0.0">
 			<voxbox id_="1043527872" name="Unbrakable ground" pos="-100.00001 0.0 -100.00001" rot="0.0 0.0 0.0" texture="1" size="2000 1 2000" color=".5 .5 .5"/>
 		</group>
-		<group id_="973268992" open_="true" name="Trees" pos="-10.0 0.0 -13.9">
-			<vox id_="1952829824" pos="2.09999 0.1 2.3" rot="0.0 0.0 0.0" file="MOD/demoMap/vox/tree-pine-small.vox"/>
-			<vox id_="1649904000" pos="0.99999 0.1 -1.5" rot="0.0 -70.0 0.0" file="MOD/demoMap/vox/tree-pine-small.vox"/>
-			<vox id_="1924385536" pos="-1.50001 0.1 1.1" rot="0.0 160.0 0.0" file="MOD/demoMap/vox/tree-pine-small.vox"/>
-		</group>
-		<group id_="1452956288" open_="true" name="Trees" pos="-10.0 0.0 22.3">
-			<body id_="1793895296" open_="true" pos="-0.1 -0.1 -0.1" dynamic="true">
-				<vox id_="1525508992" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
-					<joint id_="923851840" pos="-0.1 0.3 0.0" rotspring="0"/>
-					<joint id_="406544608" pos="-0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="902289152" pos="0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="1321089792" pos="0.1 0.3 0.0" rotspring="0"/>
-				</vox>
-			</body>
-			<body id_="760591680" open_="true" pos="-1.4 -0.1 5.9" dynamic="true">
-				<vox id_="1480941824" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
-					<joint id_="126295584" pos="-0.1 0.3 0.0" rotspring="0"/>
-					<joint id_="1266626048" pos="-0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="612733440" pos="0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="471429216" pos="0.1 0.3 0.0" rotspring="0"/>
-				</vox>
-			</body>
-			<body id_="48237440" open_="true" pos="4.0 -0.1 3.5" dynamic="true">
-				<vox id_="849201792" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
-					<joint id_="1598717184" pos="-0.1 0.3 0.0" rotspring="0"/>
-					<joint id_="680108608" pos="-0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="372070592" pos="0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="193277456" pos="0.1 0.3 0.0" rotspring="0"/>
-				</vox>
-			</body>
-			<body id_="1554150016" open_="true" pos="5.9 -0.1 -2.5" dynamic="true">
-				<vox id_="1407733632" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
-					<joint id_="1804250624" pos="-0.1 0.3 0.0" rotspring="0"/>
-					<joint id_="1077281024" pos="-0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="1940377216" pos="0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="2019746176" pos="0.1 0.3 0.0" rotspring="0"/>
-				</vox>
-			</body>
-			<body id_="1182800384" open_="true" pos="10.3 -0.1 1.9" dynamic="true">
-				<vox id_="727231872" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
-					<joint id_="1708103424" pos="-0.1 0.3 0.0" rotspring="0"/>
-					<joint id_="274415968" pos="-0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="68620384" pos="0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="187051168" pos="0.1 0.3 0.0" rotspring="0"/>
-				</vox>
-			</body>
-			<body id_="1035269824" open_="true" pos="8.0 -0.1 8.0" dynamic="true">
-				<vox id_="1698338048" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
-					<joint id_="494040512" pos="-0.1 0.3 0.0" rotspring="0"/>
-					<joint id_="1851701632" pos="-0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="1024193600" pos="0.1 0.3 -0.2" rotspring="0"/>
-					<joint id_="1109788800" pos="0.1 0.3 0.0" rotspring="0"/>
-				</vox>
-			</body>
-		</group>
-		<group id_="1625195392" open_="true" name="House" pos="3.1 0.1 -17.1" prop0="texture=4 0.33">
+		<group id_="1625195392" name="House" pos="3.1 0.1 -17.1" prop0="texture=4 0.33">
 			<group id_="589008000" open_="true" name="Walls" pos="-0.03 0.2 -0.96">
 				<voxbox id_="1093600384" name="wall" pos="-7.9 0.0 -3.9" rot="0.0 0.0 0.0" size="159 53 6" brush="MOD/demoMap/brush/plastered_cinderblock.vox" object="wall"/>
 				<voxbox id_="1887355392" name="wall" pos="-7.9 0.0 3.6" rot="0.0 0.0 0.0" size="159 53 6" brush="MOD/demoMap/brush/plastered_cinderblock.vox" object="wall"/>
@@ -213,184 +154,116 @@
 				</compound>
 			</group>
 		</group>
-		<group id_="1520659072" open_="true" name="Car" pos="17.3 0.2 -2.0">
-			<group id_="1331248512" open_="true" name="instance=MOD/demoMap/salooncar/salooncar.xml" pos="0.0 0.1 -0.9" rot="0.0 -143.7 0.0">
-				<vehicle tags="explosiveCar" id_="1595899008" open_="true" rot="0.0 0.0 0.0" sound="small1 0.8" spring="1.0" damping="1.5" topspeed="90" acceleration="6" strength="4" antiroll="0.2" difflock="0.2" steerassist="0.4" friction="1.8">
-					<body id_="1884471680" open_="true" pos="0.0 0.4 -0.15" rot="0.0 0.0 0.0" dynamic="true">
-						<vox id_="325209472" open_="true" tags="explosive=2" pos="0.05 -0.3 0.15" rot="0 180 0" density="1.2" strength="2" file="MOD/demoMap/salooncar/salooncar.vox" object="body">
-							<light id_="388521120" pos="0.6 0.65 -2.1" rot="0 180 0" type="area" color="1 .1 .1" size="0.2 0.1" unshadowed="0.3" glare="0.2"/>
-							<light id_="840484992" pos="0.75 0.65 -2.1" rot="0 180 0" type="area" size="0.1 0.1" unshadowed="0.3"/>
-							<light id_="1727044480" pos="-0.65 0.65 -2.1" rot="0 180 0" type="area" size="0.1 0.1" unshadowed="0.3"/>
-							<light id_="237451424" pos="-0.5 0.65 -2.1" rot="0 180 0" type="area" color="1 .1 .1" size="0.2 0.1" unshadowed="0.3" glare="0.2"/>
-							<light id_="53808340" pos="-0.5 0.55 2.1" rot="0.0 0.0 0.0" type="cone" color="1 .9 .8" scale="20" angle="90" penumbra="30" size="0.1" unshadowed="0.2" glare="0.3"/>
-							<light id_="1880932480" pos="0.6 0.55 2.1" rot="0.0 0.0 0.0" type="cone" color="1 .9 .8" scale="20" angle="90" penumbra="30" size="0.1" unshadowed="0.2" glare="0.3"/>
-							<location id_="1621852800" tags="exhaust" pos="0.45 0.15 -2.05" rot="180.0 0.0 180.0"/>
-							<location id_="1458527104" tags="vital" pos="0.05 0.55 1.35" rot="180.0 0.0 180.0"/>
-							<location id_="322850048" tags="player" pos="0.35 1.15 0.1" rot="0.0 0.0 0.0"/>
-						</vox>
-						<wheel id_="1546088576" name="bl" pos="-0.65 -0.1 1.45" drive="1" travel="-0.1 0.1">
-							<vox id_="911595840" pos="-0.1 -0.3 0.0" rot="0.0 180.0 0.0" file="MOD/demoMap/salooncar/salooncar.vox" object="wheel_bl"/>
-						</wheel>
-						<wheel id_="1036449536" name="br" pos="0.65 -0.1 1.45" drive="1" travel="-0.1 0.1">
-							<vox id_="124001680" pos="0.1 -0.3 0.0" rot="0.0 -180.0 0.0" file="MOD/demoMap/salooncar/salooncar.vox" object="wheel_br"/>
-						</wheel>
-						<wheel id_="1692963712" name="fl" pos="-0.65 -0.1 -1.15" rot="0.0 0.0 0.0" drive="0" steer="1" travel="-0.1 0.1">
-							<vox id_="1320696576" pos="-0.1 -0.3 0.0" rot="0.0 180.0 0.0" file="MOD/demoMap/salooncar/salooncar.vox" object="wheel_fl"/>
-						</wheel>
-						<wheel id_="905107392" name="fr" pos="0.65 -0.1 -1.15" drive="0" steer="1" travel="-0.1 0.1">
-							<vox id_="1328692480" pos="0.1 -0.3 0.0" rot="0.0 -180.0 0.0" file="MOD/demoMap/salooncar/salooncar.vox" object="wheel_fr"/>
-						</wheel>
-					</body>
-				</vehicle>
-			</group>
-			<group id_="1615954176" open_="true" name="instance=MOD/demoMap/salooncar/salooncar.xml" pos="0.0 0.1 32.4" rot="0.0 76.3 0.0">
-				<vehicle tags="explosiveCar" id_="73535880" open_="true" rot="0.0 0.0 0.0" sound="small1 0.8" spring="1.0" damping="1.5" topspeed="90" acceleration="6" strength="4" antiroll="0.2" difflock="0.2" steerassist="0.4" friction="1.8">
-					<body id_="938139584" open_="true" pos="0.0 0.4 -0.15" rot="0.0 0.0 0.0" dynamic="true">
-						<vox id_="1346912512" open_="true" tags="explosive=2" pos="0.05 -0.3 0.15" rot="0 180 0" density="1.2" strength="2" file="MOD/demoMap/salooncar/salooncar.vox" object="body">
-							<light id_="2009521920" pos="0.6 0.65 -2.1" rot="0 180 0" type="area" color="1 .1 .1" size="0.2 0.1" unshadowed="0.3" glare="0.2"/>
-							<light id_="1396395264" pos="0.75 0.65 -2.1" rot="0 180 0" type="area" size="0.1 0.1" unshadowed="0.3"/>
-							<light id_="536444896" pos="-0.65 0.65 -2.1" rot="0 180 0" type="area" size="0.1 0.1" unshadowed="0.3"/>
-							<light id_="1569879680" pos="-0.5 0.65 -2.1" rot="0 180 0" type="area" color="1 .1 .1" size="0.2 0.1" unshadowed="0.3" glare="0.2"/>
-							<light id_="901568256" pos="-0.5 0.55 2.1" rot="0.0 0.0 0.0" type="cone" color="1 .9 .8" scale="20" angle="90" penumbra="30" size="0.1" unshadowed="0.2" glare="0.3"/>
-							<light id_="1158878336" pos="0.6 0.55 2.1" rot="0.0 0.0 0.0" type="cone" color="1 .9 .8" scale="20" angle="90" penumbra="30" size="0.1" unshadowed="0.2" glare="0.3"/>
-							<location id_="796638720" tags="exhaust" pos="0.45 0.15 -2.05" rot="180.0 0.0 180.0"/>
-							<location id_="1194401024" tags="vital" pos="0.05 0.55 1.35" rot="180.0 0.0 180.0"/>
-							<location id_="1521511040" tags="player" pos="0.35 1.15 0.1" rot="0.0 0.0 0.0"/>
-						</vox>
-						<wheel id_="839829568" name="bl" pos="-0.65 -0.1 1.45" drive="1" travel="-0.1 0.1">
-							<vox id_="1364477312" pos="-0.1 -0.3 0.0" rot="0.0 180.0 0.0" file="MOD/demoMap/salooncar/salooncar.vox" object="wheel_bl"/>
-						</wheel>
-						<wheel id_="848153152" name="br" pos="0.65 -0.1 1.45" drive="1" travel="-0.1 0.1">
-							<vox id_="70258880" pos="0.1 -0.3 0.0" rot="0.0 -180.0 0.0" file="MOD/demoMap/salooncar/salooncar.vox" object="wheel_br"/>
-						</wheel>
-						<wheel id_="1476485120" name="fl" pos="-0.65 -0.1 -1.15" rot="0.0 0.0 0.0" drive="0" steer="1" travel="-0.1 0.1">
-							<vox id_="1213669760" pos="-0.1 -0.3 0.0" rot="0.0 180.0 0.0" file="MOD/demoMap/salooncar/salooncar.vox" object="wheel_fl"/>
-						</wheel>
-						<wheel id_="573671616" name="fr" pos="0.65 -0.1 -1.15" drive="0" steer="1" travel="-0.1 0.1">
-							<vox id_="158672336" pos="0.1 -0.3 0.0" rot="0.0 -180.0 0.0" file="MOD/demoMap/salooncar/salooncar.vox" object="wheel_fr"/>
-						</wheel>
-					</body>
-				</vehicle>
-			</group>
-		</group>
 	</group>
-	<environment id_="1827189632" name="Environment" template="sunny" sunBrightness="3"/>
-	<spawnpoint id_="1200823936" name="Player spawn" pos="2.9 0.0 5.4" rot="0.0 40.0 0.0"/>
-	<boundary id_="913889792" name="Boundary" pos="0.0 -6.1 0.0" rot="0.0 0.0 0.0">
-		<vertex pos="-100.0 -99.9"/>
-		<vertex pos="100.0 -100.0"/>
-		<vertex pos="100.0 100.0"/>
-		<vertex pos="-100.0 99.9"/>
-	</boundary>
-	<group id_="1212424448" open_="true" pos="-13.8 0.1 -10.3">
-		<voxbox id_="1087308544" name="planks" pos="-0.3 0.0 2.6" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
-		<voxbox id_="487224352" name="planks" pos="17.3 0.0 2.6" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
-		<voxbox id_="80024336" name="planks" pos="17.3 0.0 13.1" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
-		<voxbox id_="1813032960" name="planks" pos="-0.3 0.0 13.1" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
-		<voxbox id_="2091971200" name="planks" pos="-0.3 0.0 23.6" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
-		<voxbox id_="190655856" name="planks" pos="17.3 0.0 23.6" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
-		<voxbox id_="383146848" name="planks" pos="17.3 0.0 34.10002" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
-		<voxbox id_="2058676992" name="planks" pos="-0.3 0.0 34.10002" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
-		<body id_="54004960" pos="24.2 0.0 15.8" rot="0.0 0.0 90.0" dynamic="true"/>
-		<body id_="198913904" pos="25.4 -1.5 16.9" rot="0.0 0.0 90.0" dynamic="true"/>
-		<body id_="1122044800" pos="23.0 1.6 14.7" rot="0.0 0.0 90.0" dynamic="true"/>
-		<group id_="776386816" open_="true" pos="8.5 5.4 7.8">
-			<body id_="186330224" pos="-8.5 -0.3 -7.8" dynamic="true"/>
-			<body id_="267141040" pos="-8.5 -7.2 -3.4" rot="-90.0 0.0 0.0" dynamic="true"/>
+	<group id_="1212424448" open_="true" name="Platform" pos="-18.1 0.1 28.3" rot="0.0 90.0 0.0">
+		<group id_="777763200" name="Wooden Ground" pos="17.3 -1.7 23.6">
+			<body id_="1122044800" pos="5.7 3.3 -8.9" rot="0.0 0.0 90.0" dynamic="true"/>
+			<voxbox id_="1087308544" name="planks" pos="-17.6 1.7 -21.0" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
+			<voxbox id_="487224352" name="planks" pos="-0.0 1.7 -21.0" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
+			<voxbox id_="80024336" name="planks" pos="-0.0 1.7 -10.5" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
+			<voxbox id_="1813032960" name="planks" pos="-17.6 1.7 -10.5" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
+			<voxbox id_="2091971200" name="planks" pos="-17.6 1.7 0.0" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
+			<voxbox id_="190655856" name="planks" pos="-0.0 1.7 0.0" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
+			<voxbox id_="383146848" name="planks" pos="-0.0 1.7 10.50002" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
+			<voxbox id_="2058676992" name="planks" pos="-17.6 1.7 10.50002" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1"/>
+			<body id_="54004960" pos="6.9 1.7 -7.8" rot="0.0 0.0 90.0" dynamic="true"/>
+			<body id_="198913904" pos="8.1 0.2 -6.7" rot="0.0 0.0 90.0" dynamic="true"/>
 		</group>
-		<group id_="1928514560" open_="true" pos="4.1 0.1 23.3">
-			<body id_="2141781632" open_="true" pos="0.0 4.3 0.0" dynamic="true">
-				<vox id_="2029642752" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="1335508608" open_="true" pos="0.0 0.1 0.0" dynamic="true">
-				<vox id_="1630045312" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="345985664" open_="true" pos="0.0 0.8 0.0" dynamic="true">
-				<vox id_="142680576" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="1844361088" open_="true" pos="0.0 1.5 0.0" dynamic="true">
-				<vox id_="1990580864" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="2096952320" open_="true" pos="0.0 2.2 0.0" dynamic="true">
-				<vox id_="1714657536" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="1556706048" open_="true" pos="0.0 2.9 0.0" dynamic="true">
-				<vox id_="764065344" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="2082926720" open_="true" pos="0.0 3.6 0.0" dynamic="true">
-				<vox id_="1918945664" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
+		<group id_="549356288" name="Wood Stack" pos="4.6 0.1 23.8">
+			<group id_="1928514560" pos="-0.5 0.0 -0.5">
+				<body id_="2141781632" open_="true" pos="0.0 4.3 0.0" dynamic="true">
+					<vox id_="2029642752" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="1335508608" open_="true" pos="0.0 0.1 0.0" dynamic="true">
+					<vox id_="1630045312" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="345985664" open_="true" pos="0.0 0.8 0.0" dynamic="true">
+					<vox id_="142680576" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="1844361088" open_="true" pos="0.0 1.5 0.0" dynamic="true">
+					<vox id_="1990580864" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="2096952320" open_="true" pos="0.0 2.2 0.0" dynamic="true">
+					<vox id_="1714657536" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="1556706048" open_="true" pos="0.0 2.9 0.0" dynamic="true">
+					<vox id_="764065344" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="2082926720" open_="true" pos="0.0 3.6 0.0" dynamic="true">
+					<vox id_="1918945664" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+			</group>
+			<group id_="295913088" pos="0.6 0.0 -0.5">
+				<body id_="1024980032" open_="true" pos="0.0 4.3 0.0" dynamic="true">
+					<vox id_="686924736" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="1748345088" open_="true" pos="0.0 0.1 0.0" dynamic="true">
+					<vox id_="2040915584" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="278413920" open_="true" pos="0.0 0.8 0.0" dynamic="true">
+					<vox id_="2133130368" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="432170752" open_="true" pos="0.0 1.5 0.0" dynamic="true">
+					<vox id_="1440044928" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="29165300" open_="true" pos="0.0 2.2 0.0" dynamic="true">
+					<vox id_="299124544" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="1233856000" open_="true" pos="0.0 2.9 0.0" dynamic="true">
+					<vox id_="1076560000" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="1106315264" open_="true" pos="0.0 3.6 0.0" dynamic="true">
+					<vox id_="249117536" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+			</group>
+			<group id_="1659145088" pos="0.6 0.0 0.6">
+				<body id_="1877786496" open_="true" pos="0.0 4.3 0.0" dynamic="true">
+					<vox id_="1385777792" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="53611720" open_="true" pos="0.0 0.1 0.0" dynamic="true">
+					<vox id_="1169168000" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="650746688" open_="true" pos="0.0 0.8 0.0" dynamic="true">
+					<vox id_="1501259264" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="274219360" open_="true" pos="0.0 1.5 0.0" dynamic="true">
+					<vox id_="1276784768" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="1345732864" open_="true" pos="0.0 2.2 0.0" dynamic="true">
+					<vox id_="1417171456" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="836814720" open_="true" pos="0.0 2.9 0.0" dynamic="true">
+					<vox id_="1196170496" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="2038687232" open_="true" pos="0.0 3.6 0.0" dynamic="true">
+					<vox id_="1495819392" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+			</group>
+			<group id_="565675712" pos="-0.5 0.0 0.6">
+				<body id_="1272852352" open_="true" pos="0.0 4.3 0.0" dynamic="true">
+					<vox id_="1683591552" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="278151744" open_="true" pos="0.0 0.1 0.0" dynamic="true">
+					<vox id_="998960704" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="966256192" open_="true" pos="0.0 0.8 0.0" dynamic="true">
+					<vox id_="1490248576" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="745386432" open_="true" pos="0.0 1.5 0.0" dynamic="true">
+					<vox id_="1701025152" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="136519824" open_="true" pos="0.0 2.2 0.0" dynamic="true">
+					<vox id_="1009971392" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="2072178176" open_="true" pos="0.0 2.9 0.0" dynamic="true">
+					<vox id_="1506895616" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+				<body id_="505313408" open_="true" pos="0.0 3.6 0.0" dynamic="true">
+					<vox id_="1471373056" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
+				</body>
+			</group>
 		</group>
-		<group id_="295913088" open_="true" pos="5.2 0.1 23.3">
-			<body id_="1024980032" open_="true" pos="0.0 4.3 0.0" dynamic="true">
-				<vox id_="686924736" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="1748345088" open_="true" pos="0.0 0.1 0.0" dynamic="true">
-				<vox id_="2040915584" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="278413920" open_="true" pos="0.0 0.8 0.0" dynamic="true">
-				<vox id_="2133130368" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="432170752" open_="true" pos="0.0 1.5 0.0" dynamic="true">
-				<vox id_="1440044928" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="29165300" open_="true" pos="0.0 2.2 0.0" dynamic="true">
-				<vox id_="299124544" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="1233856000" open_="true" pos="0.0 2.9 0.0" dynamic="true">
-				<vox id_="1076560000" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="1106315264" open_="true" pos="0.0 3.6 0.0" dynamic="true">
-				<vox id_="249117536" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-		</group>
-		<group id_="1659145088" open_="true" pos="5.2 0.1 24.4">
-			<body id_="1877786496" open_="true" pos="0.0 4.3 0.0" dynamic="true">
-				<vox id_="1385777792" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="53611720" open_="true" pos="0.0 0.1 0.0" dynamic="true">
-				<vox id_="1169168000" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="650746688" open_="true" pos="0.0 0.8 0.0" dynamic="true">
-				<vox id_="1501259264" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="274219360" open_="true" pos="0.0 1.5 0.0" dynamic="true">
-				<vox id_="1276784768" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="1345732864" open_="true" pos="0.0 2.2 0.0" dynamic="true">
-				<vox id_="1417171456" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="836814720" open_="true" pos="0.0 2.9 0.0" dynamic="true">
-				<vox id_="1196170496" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="2038687232" open_="true" pos="0.0 3.6 0.0" dynamic="true">
-				<vox id_="1495819392" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-		</group>
-		<group id_="565675712" open_="true" pos="4.1 0.1 24.4">
-			<body id_="1272852352" open_="true" pos="0.0 4.3 0.0" dynamic="true">
-				<vox id_="1683591552" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="278151744" open_="true" pos="0.0 0.1 0.0" dynamic="true">
-				<vox id_="998960704" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="966256192" open_="true" pos="0.0 0.8 0.0" dynamic="true">
-				<vox id_="1490248576" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="745386432" open_="true" pos="0.0 1.5 0.0" dynamic="true">
-				<vox id_="1701025152" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="136519824" open_="true" pos="0.0 2.2 0.0" dynamic="true">
-				<vox id_="1009971392" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="2072178176" open_="true" pos="0.0 2.9 0.0" dynamic="true">
-				<vox id_="1506895616" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-			<body id_="505313408" open_="true" pos="0.0 3.6 0.0" dynamic="true">
-				<vox id_="1471373056" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0" prop="true" file="MOD/demoMap/vox/livingroom_modern.vox" object="table_1"/>
-			</body>
-		</group>
-		<group id_="1304114944" open_="true" pos="9.2 4.7 7.9">
+		<group id_="1304114944" open_="true" name="Wooden Shelter" pos="9.2 4.7 7.9">
 			<body id_="1575253888" open_="true" pos="8.8 -1.7 -2.3" rot="0.0 0.0 -90.0" dynamic="true">
 				<vox id_="112204480" pos="0.0" file="MOD/demoMap/assets/industrial/innerfloors.vox" object="planks-plain-medium_brown"/>
 				<vox id_="184364016" pos="0.0 0.0 4.8" rot="0.0 0.0 0.0" file="MOD/demoMap/assets/industrial/innerfloors.vox" object="planks-plain-medium_brown"/>
@@ -423,7 +296,7 @@
 						<joint id_="24643040" pos="0.0 0.1 2.6"/>
 						<joint id_="763082240" pos="0.0 0.1 -2.7"/>
 					</group>
-					<group id_="969467648" open_="true" pos="17.6 -0.1 5.2">
+					<group id_="969467648" pos="17.6 -0.1 5.2">
 						<joint id_="504985696" pos="0.0 0.1 -5.2"/>
 						<joint id_="176826912" pos="0.0 0.1 0.4"/>
 						<joint id_="1119161088" pos="0.0 0.1 5.2"/>
@@ -444,14 +317,14 @@
 						<joint id_="890229824" pos="0.0 0.1 2.6"/>
 						<joint id_="1014755840" pos="0.0 0.1 -2.7"/>
 					</group>
-					<group id_="1141837824" open_="true" pos="12.2 -0.1 -0.0" rot="0.0 90.0 0.0">
+					<group id_="1141837824" pos="12.2 -0.1 -0.0" rot="0.0 90.0 0.0">
 						<joint id_="96278256" pos="0.0 0.1 -5.2"/>
 						<joint id_="1414484224" pos="0.0 0.1 0.4"/>
 						<joint id_="1731173504" pos="0.0 0.1 5.2"/>
 						<joint id_="1183455744" pos="0.0 0.1 2.6"/>
 						<joint id_="1702139392" pos="0.0 0.1 -2.7"/>
 					</group>
-					<group id_="1951846784" open_="true" pos="5.5 -0.1 0.0" rot="0.0 90.0 0.0">
+					<group id_="1951846784" pos="5.5 -0.1 0.0" rot="0.0 90.0 0.0">
 						<joint id_="1174607872" pos="0.0 0.1 -5.2"/>
 						<joint id_="1978718080" pos="0.0 0.1 0.4"/>
 						<joint id_="1505257216" pos="0.0 0.1 5.2"/>
@@ -465,42 +338,42 @@
 						<joint id_="881185280" pos="0.0 0.1 2.6"/>
 						<joint id_="1873067648" pos="0.0 0.1 -2.7"/>
 					</group>
-					<group id_="1619558912" open_="true" pos="12.2 -5.5 -0.2" rot="0.0 90.0 0.0">
+					<group id_="1619558912" pos="12.2 -5.5 -0.2" rot="0.0 90.0 0.0">
 						<joint id_="1179523328" pos="0.0 0.1 -5.2"/>
 						<joint id_="2094592896" pos="0.0 0.1 0.4"/>
 						<joint id_="1784392064" pos="0.0 0.1 5.2"/>
 						<joint id_="1415598464" pos="0.0 0.1 2.6"/>
 						<joint id_="215364448" pos="0.0 0.1 -2.7"/>
 					</group>
-					<group id_="789036032" open_="true" pos="5.5 -5.5 -0.2" rot="0.0 90.0 0.0">
+					<group id_="789036032" pos="5.5 -5.5 -0.2" rot="0.0 90.0 0.0">
 						<joint id_="1000730240" pos="0.0 0.1 -5.2"/>
 						<joint id_="1292907520" pos="0.0 0.1 0.4"/>
 						<joint id_="1891025664" pos="0.0 0.1 5.2"/>
 						<joint id_="1157960704" pos="0.0 0.1 2.6"/>
 						<joint id_="1971639808" pos="0.0 0.1 -2.7"/>
 					</group>
-					<group id_="2002181504" open_="true" pos="11.9 -5.5 -0.2" rot="0.0 90.0 0.0">
+					<group id_="2002181504" pos="11.9 -5.5 -0.2" rot="0.0 90.0 0.0">
 						<joint id_="2054679040" pos="0.0 0.1 -5.2"/>
 						<joint id_="1881981056" pos="0.0 0.1 0.4"/>
 						<joint id_="1953681920" pos="0.0 0.1 5.2"/>
 						<joint id_="1331772800" pos="0.0 0.1 2.6"/>
 						<joint id_="2139225600" pos="0.0 0.1 -2.7"/>
 					</group>
-					<group id_="1896530944" open_="true" pos="5.2 -5.5 -0.2" rot="0.0 90.0 0.0">
+					<group id_="1896530944" pos="5.2 -5.5 -0.2" rot="0.0 90.0 0.0">
 						<joint id_="699049664" pos="0.0 0.1 -5.2"/>
 						<joint id_="1214325120" pos="0.0 0.1 0.4"/>
 						<joint id_="169748608" pos="0.0 0.1 5.2"/>
 						<joint id_="1144131840" pos="0.0 0.1 2.6"/>
 						<joint id_="1296381184" pos="0.0 0.1 -2.7"/>
 					</group>
-					<group id_="2127952768" open_="true" pos="17.9 -5.5 5.2">
+					<group id_="2127952768" pos="17.9 -5.5 5.2">
 						<joint id_="1532325248" pos="0.0 0.1 -5.2"/>
 						<joint id_="1817358720" pos="0.0 0.1 0.4"/>
 						<joint id_="1431459200" pos="0.0 0.1 5.2"/>
 						<joint id_="1477927040" pos="0.0 0.1 2.6"/>
 						<joint id_="560366976" pos="0.0 0.1 -2.7"/>
 					</group>
-					<group id_="355292352" open_="true" pos="-0.2 -5.5 5.2">
+					<group id_="355292352" pos="-0.2 -5.5 5.2">
 						<joint id_="1918552448" pos="0.0 0.1 -5.2"/>
 						<joint id_="1188043520" pos="0.0 0.1 0.4"/>
 						<joint id_="1575909248" pos="0.0 0.1 5.2"/>
@@ -509,6 +382,245 @@
 					</group>
 				</voxbox>
 			</body>
+		</group>
+		<group id_="1092224128" open_="true" name="Wooden Shelter" pos="9.2 10.3 7.9">
+			<body id_="746959360" open_="true" pos="8.8 -1.7 -2.3" rot="0.0 0.0 -90.0" dynamic="true">
+				<vox id_="995552576" pos="0.0" file="MOD/demoMap/assets/industrial/innerfloors.vox" object="planks-plain-medium_brown"/>
+				<vox id_="9831000" pos="0.0 0.0 4.8" rot="0.0 0.0 0.0" file="MOD/demoMap/assets/industrial/innerfloors.vox" object="planks-plain-medium_brown"/>
+			</body>
+			<body id_="1827648384" open_="true" pos="-8.8 -1.7 2.4" rot="0.0 180.0 -90.0" dynamic="true">
+				<vox id_="852020" pos="0.0" file="MOD/demoMap/assets/industrial/innerfloors.vox" object="planks-plain-medium_brown"/>
+				<vox id_="1491952512" pos="0.0 0.0 4.8" rot="0.0 0.0 0.0" file="MOD/demoMap/assets/industrial/innerfloors.vox" object="planks-plain-medium_brown"/>
+			</body>
+			<body id_="126557744" open_="true" pos="-5.9 -1.7 -5.1" rot="0.0 90.0 -90.0" dynamic="true">
+				<vox id_="1076101248" pos="0.0" file="MOD/demoMap/assets/industrial/innerfloors.vox" object="planks-plain-medium_brown"/>
+				<vox id_="946659776" pos="0.0 0.0 4.8" rot="0.0 0.0 0.0" file="MOD/demoMap/assets/industrial/innerfloors.vox" object="planks-plain-medium_brown"/>
+			</body>
+			<body id_="1527934080" open_="true" pos="1.5 -1.7 -5.1" rot="0.0 90.0 -90.0" dynamic="true">
+				<vox id_="999943808" pos="0.0" file="MOD/demoMap/assets/industrial/innerfloors.vox" object="planks-plain-medium_brown"/>
+				<vox id_="1070530368" pos="0.0 0.0 4.8" rot="0.0 0.0 0.0" file="MOD/demoMap/assets/industrial/innerfloors.vox" object="planks-plain-medium_brown"/>
+			</body>
+			<body id_="70455504" open_="true" pos="0.0 0.9 0.0" dynamic="true">
+				<voxbox id_="1017246336" open_="true" name="planks" pos="-8.8 0.0 -5.1" rot="0.0 0.0 0.0" size="176 2 105" brush="MOD/demoMap/brush/fundaments.vox" object="wooden_floor_rough" offset="0 1">
+					<group id_="1483891200" pos="17.6 0.1 5.2">
+						<joint id_="1944440704" pos="0.0 0.1 -5.2"/>
+						<joint id_="1515481472" pos="0.0 0.1 0.4"/>
+						<joint id_="744534400" pos="0.0 0.1 5.2"/>
+						<joint id_="1461935232" pos="0.0 0.1 2.6"/>
+						<joint id_="558859584" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="467431296" pos="0.0 0.1 5.2">
+						<joint id_="933486208" pos="0.0 0.1 -5.2"/>
+						<joint id_="1039464384" pos="0.0 0.1 0.4"/>
+						<joint id_="1782753536" pos="0.0 0.1 5.2"/>
+						<joint id_="51055660" pos="0.0 0.1 2.6"/>
+						<joint id_="223163696" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="664051264" pos="17.6 -0.1 5.2">
+						<joint id_="1221075712" pos="0.0 0.1 -5.2"/>
+						<joint id_="58986000" pos="0.0 0.1 0.4"/>
+						<joint id_="1828631552" pos="0.0 0.1 5.2"/>
+						<joint id_="1165170176" pos="0.0 0.1 2.6"/>
+						<joint id_="396451456" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="2145255296" pos="0.0 -0.1 5.2">
+						<joint id_="377903648" pos="0.0 0.1 -5.2"/>
+						<joint id_="1634305408" pos="0.0 0.1 0.4"/>
+						<joint id_="491877696" pos="0.0 0.1 5.2"/>
+						<joint id_="2019287424" pos="0.0 0.1 2.6"/>
+						<joint id_="1302410880" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="580684416" pos="12.2 0.1 -0.0" rot="0.0 90.0 0.0">
+						<joint id_="1299396096" pos="0.0 0.1 -5.2"/>
+						<joint id_="385833984" pos="0.0 0.1 0.4"/>
+						<joint id_="1172182912" pos="0.0 0.1 5.2"/>
+						<joint id_="430401184" pos="0.0 0.1 2.6"/>
+						<joint id_="877384000" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="1019474688" pos="12.2 -0.1 -0.0" rot="0.0 90.0 0.0">
+						<joint id_="182332288" pos="0.0 0.1 -5.2"/>
+						<joint id_="1475895296" pos="0.0 0.1 0.4"/>
+						<joint id_="1084555904" pos="0.0 0.1 5.2"/>
+						<joint id_="1948504192" pos="0.0 0.1 2.6"/>
+						<joint id_="952558336" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="376527296" pos="5.5 -0.1 0.0" rot="0.0 90.0 0.0">
+						<joint id_="1608089472" pos="0.0 0.1 -5.2"/>
+						<joint id_="1826141056" pos="0.0 0.1 0.4"/>
+						<joint id_="418341824" pos="0.0 0.1 5.2"/>
+						<joint id_="794541440" pos="0.0 0.1 2.6"/>
+						<joint id_="539787456" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="1693029248" pos="5.5 0.1 0.0" rot="0.0 90.0 0.0">
+						<joint id_="1994251136" pos="0.0 0.1 -5.2"/>
+						<joint id_="1870380544" pos="0.0 0.1 0.4"/>
+						<joint id_="1298150784" pos="0.0 0.1 5.2"/>
+						<joint id_="585272192" pos="0.0 0.1 2.6"/>
+						<joint id_="1097860480" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="41355740" pos="12.2 -5.5 -0.2" rot="0.0 90.0 0.0">
+						<joint id_="998501888" pos="0.0 0.1 -5.2"/>
+						<joint id_="1701287296" pos="0.0 0.1 0.4"/>
+						<joint id_="1281175936" pos="0.0 0.1 5.2"/>
+						<joint id_="2122971648" pos="0.0 0.1 2.6"/>
+						<joint id_="873189440" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="1810214784" pos="5.5 -5.5 -0.2" rot="0.0 90.0 0.0">
+						<joint id_="1172248448" pos="0.0 0.1 -5.2"/>
+						<joint id_="1397574912" pos="0.0 0.1 0.4"/>
+						<joint id_="958719104" pos="0.0 0.1 5.2"/>
+						<joint id_="2091446912" pos="0.0 0.1 2.6"/>
+						<joint id_="883544768" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="536248288" pos="11.9 -5.5 -0.2" rot="0.0 90.0 0.0">
+						<joint id_="323570976" pos="0.0 0.1 -5.2"/>
+						<joint id_="202518592" pos="0.0 0.1 0.4"/>
+						<joint id_="304040064" pos="0.0 0.1 5.2"/>
+						<joint id_="883806912" pos="0.0 0.1 2.6"/>
+						<joint id_="1561490560" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="1764402304" pos="5.2 -5.5 -0.2" rot="0.0 90.0 0.0">
+						<joint id_="1422349056" pos="0.0 0.1 -5.2"/>
+						<joint id_="1127484672" pos="0.0 0.1 0.4"/>
+						<joint id_="21759280" pos="0.0 0.1 5.2"/>
+						<joint id_="324226368" pos="0.0 0.1 2.6"/>
+						<joint id_="2130443264" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="46467860" pos="17.9 -5.5 5.2">
+						<joint id_="1599110400" pos="0.0 0.1 -5.2"/>
+						<joint id_="492664192" pos="0.0 0.1 0.4"/>
+						<joint id_="98506624" pos="0.0 0.1 5.2"/>
+						<joint id_="1262759168" pos="0.0 0.1 2.6"/>
+						<joint id_="160179760" pos="0.0 0.1 -2.7"/>
+					</group>
+					<group id_="1103365888" pos="-0.2 -5.5 5.2">
+						<joint id_="614109824" pos="0.0 0.1 -5.2"/>
+						<joint id_="1804775040" pos="0.0 0.1 0.4"/>
+						<joint id_="1382500736" pos="0.0 0.1 5.2"/>
+						<joint id_="204157104" pos="0.0 0.1 2.6"/>
+						<joint id_="1875033856" pos="0.0 0.1 -2.7"/>
+					</group>
+				</voxbox>
+			</body>
+		</group>
+		<group id_="961996096" open_="true" name="Trees" pos="3.7 0.0 33.1">
+			<body id_="706062400" open_="true" pos="-0.1 -0.1 -0.1" dynamic="true">
+				<vox id_="1896137728" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+					<joint id_="1894499200" pos="-0.1 0.3 0.0" rotspring="0"/>
+					<joint id_="1385319040" pos="-0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="725134592" pos="0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="56888720" pos="0.1 0.3 0.0" rotspring="0"/>
+				</vox>
+			</body>
+			<body id_="61345440" open_="true" pos="-1.4 -0.1 5.9" dynamic="true">
+				<vox id_="451832768" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+					<joint id_="899012160" pos="-0.1 0.3 0.0" rotspring="0"/>
+					<joint id_="170272928" pos="-0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="219296832" pos="0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="2011488128" pos="0.1 0.3 0.0" rotspring="0"/>
+				</vox>
+			</body>
+			<body id_="1013182848" open_="true" pos="4.0 -0.1 3.5" dynamic="true">
+				<vox id_="16385000" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+					<joint id_="1512401024" pos="-0.1 0.3 0.0" rotspring="0"/>
+					<joint id_="38144280" pos="-0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="900454080" pos="0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="67899440" pos="0.1 0.3 0.0" rotspring="0"/>
+				</vox>
+			</body>
+			<body id_="1533504896" open_="true" pos="5.9 -0.1 -2.5" dynamic="true">
+				<vox id_="1498834304" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+					<joint id_="826656000" pos="-0.1 0.3 0.0" rotspring="0"/>
+					<joint id_="1529834624" pos="-0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="326716896" pos="0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="653892608" pos="0.1 0.3 0.0" rotspring="0"/>
+				</vox>
+			</body>
+			<body id_="1543794688" open_="true" pos="10.3 -0.1 1.9" dynamic="true">
+				<vox id_="1077084416" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+					<joint id_="1408257920" pos="-0.1 0.3 0.0" rotspring="0"/>
+					<joint id_="961340736" pos="-0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="1127025792" pos="0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="1687720576" pos="0.1 0.3 0.0" rotspring="0"/>
+				</vox>
+			</body>
+			<body id_="1012986240" open_="true" pos="8.0 -0.1 8.0" dynamic="true">
+				<vox id_="1431917952" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+					<joint id_="1814933632" pos="-0.1 0.3 0.0" rotspring="0"/>
+					<joint id_="2053826944" pos="-0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="800702208" pos="0.1 0.3 -0.2" rotspring="0"/>
+					<joint id_="656579712" pos="0.1 0.3 0.0" rotspring="0"/>
+				</vox>
+			</body>
+			<group id_="1609793536" open_="true" name="Trees" pos="36.3 0.0 -32.49999">
+				<body id_="1637975680" open_="true" pos="-0.1 -0.1 -0.1" dynamic="true">
+					<vox id_="815252032" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+						<joint id_="110762600" pos="-0.1 0.3 0.0" rotspring="0"/>
+						<joint id_="1057750080" pos="-0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="481850080" pos="0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="191114640" pos="0.1 0.3 0.0" rotspring="0"/>
+					</vox>
+				</body>
+				<body id_="305744096" open_="true" pos="-1.4 -0.1 5.9" dynamic="true">
+					<vox id_="123280736" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+						<joint id_="1150030336" pos="-0.1 0.3 0.0" rotspring="0"/>
+						<joint id_="1257450496" pos="-0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="45681380" pos="0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="732212864" pos="0.1 0.3 0.0" rotspring="0"/>
+					</vox>
+				</body>
+				<body id_="1821553280" open_="true" pos="4.0 -0.1 3.5" dynamic="true">
+					<vox id_="829343168" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+						<joint id_="1541304192" pos="-0.1 0.3 0.0" rotspring="0"/>
+						<joint id_="28116660" pos="-0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="810991936" pos="0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="1438799616" pos="0.1 0.3 0.0" rotspring="0"/>
+					</vox>
+				</body>
+				<body id_="1547530496" open_="true" pos="5.9 -0.1 -2.5" dynamic="true">
+					<vox id_="62983940" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+						<joint id_="1052965632" pos="-0.1 0.3 0.0" rotspring="0"/>
+						<joint id_="298010368" pos="-0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="44239500" pos="0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="1351500288" pos="0.1 0.3 0.0" rotspring="0"/>
+					</vox>
+				</body>
+				<body id_="715041408" open_="true" pos="10.3 -0.1 1.9" dynamic="true">
+					<vox id_="548111040" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+						<joint id_="45419220" pos="-0.1 0.3 0.0" rotspring="0"/>
+						<joint id_="1563784448" pos="-0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="609521984" pos="0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="30082860" pos="0.1 0.3 0.0" rotspring="0"/>
+					</vox>
+				</body>
+				<body id_="1825944448" open_="true" pos="8.0 -0.1 8.0" dynamic="true">
+					<vox id_="228537984" open_="true" pos="0.1 0.1 0.1" rot="0" file="MOD/demoMap/vox/tree-pine-small.vox">
+						<joint id_="16122840" pos="-0.1 0.3 0.0" rotspring="0"/>
+						<joint id_="1937493504" pos="-0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="222639376" pos="0.1 0.3 -0.2" rotspring="0"/>
+						<joint id_="655727680" pos="0.1 0.3 0.0" rotspring="0"/>
+					</vox>
+				</body>
+			</group>
+		</group>
+		<group id_="736014208" open_="true" name="Vehicles" pos="31.4 0.2 8.9">
+			<instance id_="370694240" pos="0.0 0.1 -0.9" rot="0.0 -143.7 0.0" file="MOD/demoMap/salooncar/salooncar.xml"/>
+			<instance id_="165029728" pos="0.0 0.1 31.5" file="MOD/demoMap/assets/vehicles/land/van.xml"/>
+			<instance id_="868142848" pos="-5.2 0.1 31.5" file="MOD/demoMap/assets/vehicles/land/taskmaster-4wd.xml"/>
+		</group>
+	</group>
+	<group id_="210317856" name="Map Static">
+		<boundary id_="1987762688" name="Boundary" pos="0.0 -6.1 0.0" rot="0.0 0.0 0.0">
+			<vertex pos="-100.0 -99.9"/>
+			<vertex pos="100.0 -100.0"/>
+			<vertex pos="100.0 100.0"/>
+			<vertex pos="-100.0 99.9"/>
+		</boundary>
+		<environment id_="1500866048" name="Environment" template="sunny" sunBrightness="3"/>
+		<spawnpoint id_="1625981824" name="Player spawn" pos="2.9 0.0 5.4" rot="0.0 40.0 0.0"/>
+		<group id_="1555133184" name="Script">
+			<script id_="1730321536" file="main.lua"/>
+			<script id_="527662528" file="sandbox.lua"/>
 		</group>
 	</group>
 	<layers/>

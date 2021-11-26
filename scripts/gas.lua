@@ -63,9 +63,12 @@ function Gas.drops.crud.create(tr)
 
     }
 
+    -- Registry live updates.
+    drop.burn.ignitionDistance = regGetFloat('tool.gas.ignitionDistance')
+
     -- Drop timer varience.
-    drop.timers.burn.rpm = drop.timers.burn.rpm * 1 + (-0.5 + rdm())
-    drop.timers.preBurn.rpm = drop.timers.preBurn.rpm * 1 + (-0.5 + rdm())
+    drop.timers.burn.rpm = 60 / regGetFloat('tool.gas.burnTime') * 1 + (-0.5 + rdm()) -- Registry live updates.
+    drop.timers.preBurn.rpm = 60 / regGetFloat('tool.gas.preburnTime') * 1 + (-0.5 + rdm()) -- Registry live updates.
 
     -- Drop ignition distance varience.
     drop.burn.ignitionDistance = drop.burn.ignitionDistance * 1 + (-0.5 + rdm())

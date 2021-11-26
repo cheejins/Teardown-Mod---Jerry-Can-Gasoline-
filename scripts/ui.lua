@@ -305,26 +305,26 @@ options_tabs_render = {
         UiAlign('left middle')
         UiText('(Info section coming soon)')
         ui.padding.create(0, 50)
-
         ui.padding.create(0, 50)
+
         UiText('CONTROLS')
         ui.padding.create(0, 50)
         UiText('- r = remove all gas drops')
         ui.padding.create(0, 50)
-        UiText('- left click = pour gas.')
+        UiText('- Left Click = pour gas.')
         ui.padding.create(0, 50)
-        UiText('- right click = spawn fire at your crosshair..')
+        UiText('- Right Click = spawn fire at your crosshair..')
+        ui.padding.create(0, 50)
         ui.padding.create(0, 50)
 
-
-        ui.padding.create(0, 50)
         UiText('QUICK NOTES')
         ui.padding.create(0, 50)
         UiText('- Gas only ignites near existing fires.')
         ui.padding.create(0, 50)
-        UiText('- Gas will not ignite on non-flammable materials like metal or concrete (yet)')
-        ui.padding.create(0, 50)
         UiText('- The Gas Can options are already tuned. Changing them too much can mess up the functionality of the gas.')
+        UiColor(1,0,0, 1)
+        ui.padding.create(0, 50)
+        UiText('- Gas will not ignite on non-flammable materials like metal or concrete yet. Looking for a work-around.')
 
     end,
 
