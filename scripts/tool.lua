@@ -11,9 +11,9 @@ tool = {
         },
 
         setup = {
-            name = 'jerryCan',
-            title = 'Jerry Can',
-            voxPath = 'MOD/vox/jerryCan.vox',
+            name = 'gasCan',
+            title = 'Gas Can',
+            voxPath = 'MOD/vox/gasCan.vox',
         },
 
         active = function()

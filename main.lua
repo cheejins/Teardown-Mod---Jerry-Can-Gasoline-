@@ -11,7 +11,7 @@
 #include "scripts/utility.lua"
 
 ------------------------------------------------
---- Jerry Can (Gasoline)
+--- Gas Can
 --- By: Cheejins
 ------------------------------------------------
 
@@ -49,17 +49,10 @@ function draw()
     if tool.tool.active() then
         uiDrawToolNameOptionsHint()
     end
+
     uiManageGameOptions()
 
 end
 
-function checkRegInitialized()
-    local regInit = GetBool('savegame.mod.regInit')
-    if regInit == false then
-        modReset()
-        SetBool('savegame.mod.regInit', true)
-    end
-end
 
 UpdateQuickloadPatch()
-

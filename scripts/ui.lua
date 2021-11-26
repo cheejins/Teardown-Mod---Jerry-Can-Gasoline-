@@ -65,7 +65,7 @@ function uiDrawTitleContainer()
         UiColor(1,1,1, 1)
         UiFont('bold.ttf', textHeight)
         UiAlign('top left')
-        UiText('Jerry Can (Gasoline)')
+        UiText('Gas Can')
 
         -- Mod Subtitle
         ui.padding.create(0, textHeight + padH/2)
@@ -260,16 +260,19 @@ options_tabs_render = {
 
         do UiPush()
 
-            ui.slider.create('Combustion distance', 'tool.gas.ignitionDistance', nil, 1, 3)
+            ui.slider.create('Minimum Ignition Distance', 'tool.gas.ignitionDistance', nil, 1, 3)
             ui.padding.create(0, 64)
 
-            ui.slider.create('Time before igniting', 'tool.gas.preburnTime', 'Seconds', 0, 3)
+            ui.slider.create('Ignition Delay', 'tool.gas.preburnTime', 'Seconds', 0, 3)
             ui.padding.create(0, 64)
 
-            ui.slider.create('Burn duration', 'tool.gas.burnTime', 'Seconds', 0, 60)
+            ui.slider.create('Burn Duration', 'tool.gas.burnTime', 'Seconds', 0, 60)
+            ui.padding.create(0, 64)
+  
+            ui.slider.create('Burn Thickness', 'tool.gas.burnThickness', 'Meters', 0, 4)
             ui.padding.create(0, 64)
 
-            ui.slider.create('Destructive Fire', 'tool.gas.destructive')
+            ui.checkBox.create('Gas-Covered Vehicles Become Explosive', 'tool.gas.explosiveVehicles')
             ui.padding.create(0, 64)
 
         UiPop() end
@@ -291,27 +294,27 @@ options_tabs_render = {
         UiFont('bold.ttf', 32)
         UiAlign('left middle')
         UiText('(Info section coming soon)')
-        ui.padding.create(0, 40)
+        ui.padding.create(0, 50)
 
-        ui.padding.create(0, 40)
+        ui.padding.create(0, 50)
         UiText('CONTROLS')
-        ui.padding.create(0, 40)
+        ui.padding.create(0, 50)
         UiText('- r = remove all gas drops')
-        ui.padding.create(0, 40)
+        ui.padding.create(0, 50)
         UiText('- left click = pour gas.')
-        ui.padding.create(0, 40)
+        ui.padding.create(0, 50)
         UiText('- right click = spawn fire at your crosshair..')
-        ui.padding.create(0, 40)
+        ui.padding.create(0, 50)
 
 
-        ui.padding.create(0, 40)
+        ui.padding.create(0, 50)
         UiText('QUICK NOTES')
-        ui.padding.create(0, 40)
+        ui.padding.create(0, 50)
         UiText('- Gas only ignites near existing fires.')
-        ui.padding.create(0, 40)
+        ui.padding.create(0, 50)
         UiText('- Gas will not ignite on non-flammable materials like metal or concrete (yet)')
-        ui.padding.create(0, 40)
-        UiText('- The Jerry Can options are already tuned. Changing them too much can mess up the functionality of the gas.')
+        ui.padding.create(0, 50)
+        UiText('- The Gas Can options are already tuned. Changing them too much can mess up the functionality of the gas.')
 
     end,
 
@@ -323,10 +326,10 @@ function uiDrawToolNameOptionsHint(addHeight)
 
     UiPush()
 
-        UiTranslate(UiCenter(), UiHeight() - (addHeight or 56))
+        UiTranslate(UiCenter(), UiHeight() - (addHeight or 60))
 
         UiAlign("center middle")
-        UiFont("bold.ttf", 24)
+        UiFont("bold.ttf", 32)
         UiTextShadow(0,0,0, 1, 0.3, 0.5)
         UiColor(1,1,1, 1)
 
@@ -454,5 +457,61 @@ function ui.slider.create(title, registryPath, valueText, min, max, w, h, fontSi
         ui.padding.create(slW + 20, 0)
         UiText(sfn((value/slW) * (max-min) + min, 3) .. ' ' .. (valueText or ''))
     UiPop() end
+
+end
+
+
+ui.checkBox = {}
+
+function ui.checkBox.create(title, registryPath)
+
+    local value = GetBool('savegame.mod.' .. registryPath)
+
+    UiAlign('left middle')
+
+    -- Text header
+    UiColor(1,1,1, 1)
+    UiFont('regular.ttf', fontSize or font_normal)
+    UiText(title)
+    ui.padding.create(0, fontSize or font_normal)
+
+    -- Toggle BG
+    UiAlign('left top')
+    UiColor(0.4,0.4,0.4, 1)
+    local tglW = w or 150
+    local tglH = h or 50
+    UiRect(tglW, h or tglH)
+
+    -- Render toggle
+    do UiPush()
+
+        local toggleText = 'ON'
+
+        if value then
+            ui.padding.create(tglW/2, 0)
+            UiColor(0,0.8,0, 1)
+        else
+            toggleText = 'OFF'
+            UiColor(0.8,0,0, 1)
+        end
+
+        UiRect(tglW/2, tglH)
+
+        do UiPush()
+            ui.padding.create(tglW/4, tglH/2)
+            UiColor(1,1,1, 1)
+            UiFont('bold.ttf', font_normal)
+            UiAlign('center middle')
+            UiText(toggleText)
+        UiPop() end
+
+    UiPop() end
+
+    UiButtonImageBox('ui/common/box-outline-6.png', 10,10, 0,0,0, a)
+    if UiBlankButton(150, 50) then
+        SetBool('savegame.mod.' .. registryPath, not value)
+
+        DebugPrint(GetBool('savegame.mod.' .. registryPath))
+    end
 
 end

@@ -4,18 +4,17 @@ projectiles = {}
 
 function initProjectiles()
     projPresets = {
-        jerryCan = {
+        gasCan = {
             isActive = true, -- Active when firing, inactive after hit.
             hit = false,
             lifeLength = 10, --Seconds
-    
+
             speed = regGetFloat('tool.pour.velocity'),
             drop = regGetFloat('tool.pour.velocity') * regGetFloat('tool.pour.gravity'),
             dropIncrement = regGetFloat('tool.pour.gravity')/10,
-    
+
             particle = 'smoke',
-            -- particlePreset = particlePresets.jerryCan,
-    
+
             particleColor = Vec(1, 1, 1),
             explosive = 0,
             sound = nil,

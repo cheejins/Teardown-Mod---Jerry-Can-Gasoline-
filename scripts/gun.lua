@@ -22,7 +22,7 @@ Gun.actions = {
                 math.random()*spreadMult,
                 math.random()*spreadMult))
 
-        createProj(toolTr, projectiles, projPresets.jerryCan)
+        createProj(toolTr, projectiles, projPresets.gasCan)
 
     end,
 
@@ -32,9 +32,15 @@ Gun.actions = {
         if hit then
             -- Spawn a fire at the position of the drop.
             Gas.drops.burn.burnPosition(pos)
-            Gas.drops.effects.renderDropBurning(pos)
-            Gas.drops.effects.renderDropBurning(pos)
-            Gas.drops.effects.renderDropBurning(pos)
+
+            for i = 1, 5 do
+                Gas.drops.burn.burnPosition(VecAdd(pos, VecScale(rdmVec(), 0.1)))
+            end
+
+            for i = 1, 10 do
+                Gas.drops.effects.renderDropBurning(pos)
+            end
+
         end
 
     end,

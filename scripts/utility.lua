@@ -106,6 +106,10 @@
         local mi, ma = GetShapeBounds(shape)
         return VecLerp(mi,ma,0.5)
     end
+    function AabbGetBodyCenterPos(body)
+        local mi, ma = GetBodyBounds(body)
+        return VecLerp(mi,ma,0.5)
+    end
     function AabbGetShapeCenterTopPos(shape, addY)
         addY = addY or 0
         local mi, ma = GetShapeBounds(shape)

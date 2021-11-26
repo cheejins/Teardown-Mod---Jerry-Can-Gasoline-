@@ -1,6 +1,7 @@
 Gas = {}
 Gas.drops = {} -- Holds common data for all drops.
 Gas.dropsList = {}
+Gas.explodedVehicles = {}
 
 function Gas.run()
 
@@ -43,6 +44,7 @@ function Gas.drops.crud.create(tr)
             shape = nil,
             shapeMass = nil,
             shapeRelativePos = nil,
+            explodedStickyVehicle = nil, -- Explode a vehicle only once (drops spread to new vehicles sometimes, prevents nuke explosions.)
         },
 
         color = Vec(1,1,1), -- color
@@ -132,15 +134,41 @@ function Gas.drops.physics.process(drop)
 
 end
 
+function Gas.drops.physics.processVehicleExplosions(drop, explosionSize)
+
+    local explosiveVehicles = GetBool('savegame.mod.tool.gas.explosiveVehicles')
+
+    if explosiveVehicles then
+
+        local vehicle = GetBodyVehicle(GetShapeBody(drop.sticky.shape))
+
+        local explodedVehicle = false
+        for i = 1, #Gas.explodedVehicles do
+            if Gas.explodedVehicles[i] == vehicle then
+                explodedVehicle = true
+            end
+        end
+
+        if explodedVehicle == false and vehicle ~= 0 then
+            local pos = AabbGetBodyCenterPos(GetVehicleBody(vehicle))
+            Explosion(pos, explosionSize or 2)
+            table.insert(Gas.explodedVehicles, vehicle)
+        end
+
+    end
+
+end
 
 
 
 Gas.drops.physics.sticky = {}
 
 function Gas.drops.physics.sticky.setShape(drop, shape)
+
     drop.sticky.shape = shape
     drop.sticky.shapeMass = GetBodyMass(GetShapeBody(shape))
     drop.sticky.shapeRelativePos = TransformToLocalPoint(GetShapeWorldTransform(shape), drop.tr.pos)
+
     dbp('drop shape set ' .. sfnTime())
 end
 
@@ -169,7 +197,6 @@ function Gas.drops.physics.sticky.dripAndStick(drop)
 
         -- Set shape.
         Gas.drops.physics.sticky.setShape(drop, dropRcShape)
-
         drop.color = Vec(0,1,0)
 
     else --> No hit.
@@ -201,7 +228,9 @@ end
 
 --- Burns a position and applies visual effects. Does not ignite drops.
 function Gas.drops.burn.burnPosition(pos)
-    SpawnFire(pos)
+    local scale = regGetFloat('tool.gas.burnThickness')
+    local vecArea = VecScale(rdmVec(), scale)
+    SpawnFire(VecAdd(pos, vecArea))
 end
 
 -- Burn after preBurn timer.
@@ -209,15 +238,14 @@ function Gas.drops.burn.burn(drop)
 
     if drop.burn.isBurning then
 
-        local dropIsStillBurning = drop.timers.burn.time > 0
-        local dropFinishedBurning = drop.timers.burn.time <= 0
-
-        if dropIsStillBurning then
+        if drop.timers.burn.time > 0 then
 
             Gas.drops.burn.burnPosition(drop.tr.pos)
             TimerRunTime(drop.timers.burn) -- Consume the drop burn timer.
 
-        elseif dropFinishedBurning then
+        elseif drop.timers.burn.time <= 0 then
+
+            Gas.drops.physics.processVehicleExplosions(drop, 2)
 
             Gas.drops.crud.markDropForRemoval(drop) -- Delete drop.
 
@@ -257,32 +285,11 @@ function Gas.drops.burn.preBurn(drop)
 
 end
 
---- Handles the core ignition system of the drops (does not process manual spread or burning).
-function Gas.drops.burn.spreadFire()
-
-    for i = 1, #Gas.dropsList do
-
-        local drop = Gas.dropsList[i]
-
-        for j = 1, #Gas.dropsList do
-
-            if VecDist(drop, Gas.dropsList[j].tr.pos) < drop.burn.ignitionDistance then
-
-                Gas.drops.burn.igniteDrop(drop)
-                return -- Single node of drops only.
-
-            end
-
-        end
-
-    end
-
-end
-
 function Gas.drops.burn.igniteDrop(drop)
     drop.burn.isBurning = true
 end
 
+--- Burn a drop projectile as it pours
 -- function Gas.drops.burn.projectiles()
 --     for i = 1, #projectiles do
 --         local fireIsClose = QueryClosestFire(projectiles[i].transform.pos, regGetFloat('tool.gas.ignitionDistance'))
@@ -350,17 +357,19 @@ function Gas.drops.effects.renderDropBurning(pos)
 
     ParticleReset()
 
+    local burnThickness = regGetFloat('tool.gas.burnThickness')/4
+
     -- Flame particles.
     ParticleType("smoke")
     ParticleColor(86.0,0.5,0.3, 0.76,0.25,0.1)
-    ParticleRadius(0.2, 0.5, "linear")
+    ParticleRadius(burnThickness, burnThickness*2, "linear")
     ParticleTile(5)
     ParticleGravity(0.5)
     ParticleEmissive(4.0, 1, "easein")
     ParticleRotation(rdm(), 0, "linear")
     ParticleStretch(5)
     ParticleCollide(0.5)
-    SpawnParticle(pos, Vec(0, 0, 0), 1)
+    SpawnParticle(pos, Vec(0, 0, 0), 0.5)
 
     -- Smoke particles
     local smokePos = VecAdd(pos, Vec(0,math.random() + 0.5,0))

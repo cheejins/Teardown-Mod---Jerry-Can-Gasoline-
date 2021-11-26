@@ -1,4 +1,4 @@
-name = Jerry Can (Gasoline)
+name = Gas Can (Beta Version)
 author = Cheejins
 description = [noupload]Go to the mod's options to play the demo map.
 tags = Map, Tool
