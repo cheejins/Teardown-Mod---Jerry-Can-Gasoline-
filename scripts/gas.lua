@@ -354,14 +354,13 @@ function Gas.drops.effects.renderDropsIdleSimple()
 
     do UiPush()
 
-        UiColor(1,1,0, 0.5)
         local camTr = GetCameraTransform()
 
         for i = 1, #Gas.dropsList do
 
             local drop = Gas.dropsList[i]
             local dist = VecDist(camTr.pos, drop.tr.pos)
-            local s = (100/dist)
+            local s = (90/dist)
 
             -- Check if drop is in front of the camera.
             if TransformToLocalPoint(camTr, drop.tr.pos)[3] < 0 then
@@ -370,6 +369,7 @@ function Gas.drops.effects.renderDropsIdleSimple()
 
                 do UiPush()
 
+                    UiColor(1,1,0, 0.6)
                     UiTranslate(dropPx, dropPy)
                     -- UiImage('ui/common/dot.png')
                     UiRect(s,s)
@@ -393,7 +393,7 @@ function Gas.drops.effects.renderDropIdle(pos)
     ParticleTile(4)
     ParticleColor(0.8,0.8,0)
     ParticleRadius(0.08)
-    ParticleAlpha(1)
+    ParticleAlpha(0.8)
     ParticleGravity(0)
     ParticleDrag(0)
     ParticleEmissive(1)
@@ -402,9 +402,7 @@ function Gas.drops.effects.renderDropIdle(pos)
     ParticleSticky(0)
     ParticleCollide(0)
 
-    SpawnParticle(pos, Vec(), 0.08)
-
-    DrawDot(pos, 0.2,0.2, 0.7,0.9,0, 1)
+    SpawnParticle(pos, Vec(), 0.05)
 
 end
 
