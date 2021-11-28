@@ -93,7 +93,7 @@ function uiDrawTitleContainer()
         UiFont('bold.ttf', 64)
 
         UiButtonImageBox('ui/common/box-outline-6.png', 10,10, 0,1,0, a)
-        if UiTextButton('Play Demo Map', 440,70) then
+        if UiTextButton('Play Demo Map', 440, title_h - padH2) then
             StartLevel("", "MOD/demoMap/main.xml")
         end
 
@@ -154,19 +154,19 @@ function uiDrawOptionsContainer()
     UiPop() end
 
 
-    do UiPush()
+    -- do UiPush()
 
-        ui.padding.create(800, 40)
+    --     ui.padding.create(800, 40)
 
-        local a = oscillate(5)
+    --     local a = oscillate(5)
 
-        UiColor(1,0.5,0.5, a)
-        UiFont('bold.ttf', 64)
-        UiAlign('center middle')
-        UiTextShadow(1,0,0,1, 0.3,0.3)
-        UiText('<< This mod is not finished yet >>')
+    --     UiColor(1,0.5,0.5, a)
+    --     UiFont('bold.ttf', 64)
+    --     UiAlign('center middle')
+    --     UiTextShadow(1,0,0,1, 0.3,0.3)
+    --     UiText('<< This mod is not finished yet >>')
 
-    UiPop() end
+    -- UiPop() end
 
 
     -- Button: Options reset
@@ -293,8 +293,22 @@ options_tabs_render = {
 
         UiColor(1,1,1, 1)
         UiFont('bold.ttf', 32)
-        UiAlign('left middle')
-        UiText('(Performance options coming soon)')
+        -- UiAlign('left middle')
+        -- UiText('(Performance options coming soon)')
+
+
+        ui.padding.create(500, 20)
+
+        ui.checkBox.create('Ignition Fire Particles', 'tool.gas.ignitionFireParticles')
+        ui.padding.create(0, 64)
+        ui.padding.create(0, 64)
+
+        ui.checkBox.create('Ignition Smoke Particles', 'tool.gas.ignitionSmokeParticles')
+        ui.padding.create(0, 64)
+        ui.padding.create(0, 64)
+
+        ui.checkBox.create('Render Gas Particles', 'tool.gas.renderGasParticles')
+        ui.padding.create(0, 64)
 
     end,
 
@@ -324,7 +338,7 @@ options_tabs_render = {
         UiText('- The Gas Can options are already tuned. Changing them too much can mess up the functionality of the gas.')
         UiColor(1,0,0, 1)
         ui.padding.create(0, 50)
-        UiText('- Gas will not ignite on non-flammable materials like metal or concrete yet. Looking for a work-around.')
+        UiText('- Gas will not ignite or spread fire on non-flammable materials like metal or concrete yet. Looking for a work-around.')
 
     end,
 

@@ -49,6 +49,10 @@ end
 
 function draw()
 
+    if not regGetBool('tool.gas.renderGasParticles') then
+        Gas.drops.effects.renderDropsIdleSimple()
+    end
+
     if tool.tool.active() then
         uiDrawToolNameOptionsHint()
     end

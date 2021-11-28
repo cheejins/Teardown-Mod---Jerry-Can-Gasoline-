@@ -98,7 +98,7 @@ end
 --- Mark a drop for removal to safely remove it near the end of the frame.
 function Gas.drops.crud.markDropForRemoval(drop)
     drop.removeDrop = true
-    -- dbp('Drop marked.'..sfnTime())
+    dbp('Drop marked for removal: ' .. drop.id .. ' ' ..sfnTime())
 end
 
 --- Safely delete all drops that are marked for removal.
@@ -146,7 +146,7 @@ function Gas.drops.physics.process(drop)
     drop.sticky.shapeMass = GetBodyMass(GetShapeBody(drop.sticky.shape))
 
     -- Debug.
-    dbw('GAS drop '.. drop.id ..' mass ' .. drop.id, drop.sticky.shapeMass)
+    dbw('GAS drop '.. drop.id ..' attached body mass ' .. drop.id, drop.sticky.shapeMass)
 
 end
 
@@ -322,15 +322,19 @@ Gas.drops.effects = {}
 
 function Gas.drops.effects.process()
 
-    -- Render drops.
-    for i = 1, #Gas.dropsList do
+    if regGetBool('tool.gas.renderGasParticles') then
 
-        local drop = Gas.dropsList[i]
+         -- Render drops.
+        for i = 1, #Gas.dropsList do
 
-        Gas.drops.effects.renderDropIdle(drop.tr.pos) -- Idle drop
+            local drop = Gas.dropsList[i]
 
-        if drop.burn.isBurning then
-            Gas.drops.effects.renderDropBurning(drop.tr.pos) -- Burning drop
+            Gas.drops.effects.renderDropIdle(drop.tr.pos) -- Idle drop
+
+            if drop.burn.isBurning then
+                Gas.drops.effects.renderDropBurning(drop.tr.pos) -- Burning drop
+            end
+
         end
 
     end
@@ -342,6 +346,41 @@ function Gas.drops.effects.process()
         DrawDot(proj.transform.pos, 0.2,0.2, 0.7,0.9,0, 1) -- Drop projectile
 
     end
+
+end
+
+--- Draw ui dots instead of particles based on.
+function Gas.drops.effects.renderDropsIdleSimple()
+
+    do UiPush()
+
+        UiColor(1,1,0, 0.5)
+        local camTr = GetCameraTransform()
+
+        for i = 1, #Gas.dropsList do
+
+            local drop = Gas.dropsList[i]
+            local dist = VecDist(camTr.pos, drop.tr.pos)
+            local s = (100/dist)
+
+            -- Check if drop is in front of the camera.
+            if TransformToLocalPoint(camTr, drop.tr.pos)[3] < 0 then
+
+                local dropPx, dropPy = UiWorldToPixel(drop.tr.pos)
+
+                do UiPush()
+
+                    UiTranslate(dropPx, dropPy)
+                    -- UiImage('ui/common/dot.png')
+                    UiRect(s,s)
+
+                UiPop() end
+
+            end
+
+        end
+
+    UiPop() end
 
 end
 
@@ -373,22 +412,29 @@ function Gas.drops.effects.renderDropBurning(pos)
 
     ParticleReset()
 
-    local burnThickness = regGetFloat('tool.gas.burnThickness')/4
+    local burnThickness = regGetFloat('tool.gas.burnThickness')/4 -- options>>gas
 
-    -- Flame particles.
-    ParticleType("smoke")
-    ParticleColor(86.0,0.5,0.3, 0.76,0.25,0.1)
-    ParticleRadius(burnThickness, burnThickness*2, "linear")
-    ParticleTile(5)
-    ParticleGravity(0.5)
-    ParticleEmissive(4.0, 1, "easein")
-    ParticleRotation(rdm(), 0, "linear")
-    ParticleStretch(5)
-    ParticleCollide(0.5)
-    SpawnParticle(pos, Vec(0, 0, 0), 0.5)
+    if regGetBool('tool.gas.ignitionFireParticles') then -- options>>performance
 
-    -- Smoke particles
-    local smokePos = VecAdd(pos, Vec(0,math.random() + 0.5,0))
-    SpawnParticle("darksmoke", smokePos, Vec(0, rdm(2, 3), rdm(1,2), rdm(0.5,1)), 0.5, 0.5, 0.5, 0.5)
+        -- Flame particles.
+        ParticleType("smoke")
+        ParticleColor(86.0,0.5,0.3, 0.76,0.25,0.1)
+        ParticleRadius(burnThickness, burnThickness*3, "linear")
+        ParticleTile(5)
+        ParticleGravity(0.5)
+        ParticleEmissive(4.0, 1, "easein")
+        ParticleRotation(rdm(), 0, "linear")
+        ParticleStretch(5)
+        ParticleCollide(0.5)
+
+        SpawnParticle(pos, Vec(0, 0, 0), 0.5)
+
+    end
+
+    if regGetBool('tool.gas.ignitionSmokeParticles') then -- options>>performance
+        -- Smoke particles
+        local smokePos = VecAdd(pos, Vec(0,math.random() + 0.5,0))
+        SpawnParticle("darksmoke", smokePos, Vec(0, rdm(2, 3), rdm(1,2), rdm(0.5,1)), 0.5, 0.5, 0.5, 0.5)
+    end
 
 end

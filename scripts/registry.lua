@@ -1,18 +1,26 @@
 function modReset()
 
-    regSetFloat('tool.pour.gravity'         , 0.02)
+    -- Tool
+    regSetFloat('tool.pour.gravity'         , 0.03)
     regSetFloat('tool.pour.rate'            , 1600)
-    regSetFloat('tool.pour.spread'          , 10)
-    regSetFloat('tool.pour.velocity'        , 0.2)
+    regSetFloat('tool.pour.spread'          , 7)
+    regSetFloat('tool.pour.velocity'        , 0.25)
+    regSetBool('tool.debugMode'             , false)
 
+    -- Gas
     regSetFloat('tool.gas.burnTime'         , 2)
-    regSetFloat('tool.gas.burnThickness'    , 0.5)
+    regSetFloat('tool.gas.burnThickness'    , 0.6)
     regSetFloat('tool.gas.ignitionDistance' , 2.2)
-    regSetFloat('tool.gas.preburnTime'      , 0.65)
+    regSetFloat('tool.gas.preburnTime'      , 0.7)
     regSetBool('tool.gas.explosiveVehicles' , true)
 
+    -- Performance
+    regSetBool('tool.gas.ignitionFireParticles'     , true)
+    regSetBool('tool.gas.ignitionSmokeParticles'    , true)
+    regSetBool('tool.gas.renderGasParticles'        , true)
+
+    -- Misc
     regSetFloat('tool.tool.optionsKey'      , 'o')
-    regSetBool('tool.debugMode'             , false)
 
 end
 
