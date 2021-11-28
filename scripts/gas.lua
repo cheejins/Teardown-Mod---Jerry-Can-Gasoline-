@@ -2,6 +2,7 @@ Gas = {}
 Gas.drops = {} -- Holds common data for all drops.
 Gas.dropsList = {}
 Gas.explodedVehicles = {}
+Gas.vehiclesToExplode = {}
 
 function Gas.run()
 
@@ -27,6 +28,7 @@ end
 
 
 
+
 Gas.drops.crud = {}
 
 --- Create a drop object and store it in the list of drops.
@@ -45,9 +47,11 @@ function Gas.drops.crud.create(tr)
             shapeMass = nil,
             shapeRelativePos = nil,
             explodedStickyVehicle = nil, -- Explode a vehicle only once (drops spread to new vehicles sometimes, prevents nuke explosions.)
+            -- stickyVehicleSet = false, -- Set and start timer until explosion.
         },
 
         color = Vec(1,1,1), -- color
+        alpha = 1,
 
         burn = {
             rad = 0.2, -- The radius the drop spawns fire.
@@ -59,6 +63,7 @@ function Gas.drops.crud.create(tr)
         timers = {
             preBurn =   {time = 0, rpm = 60 / regGetFloat('tool.gas.preburnTime')}, -- Once drop is near fire, wait before igniting the drop.
             burn =      {time = 0, rpm = 60 / regGetFloat('tool.gas.burnTime')}, -- Burns regardless of material type.
+            -- vehicleExplosion = {time = 0, rpm = 60 / regGetFloat('tool.gas.explosiveVehiclesDelay')}
         }
 
     }
@@ -87,12 +92,17 @@ function Gas.drops.crud.spawn(pos)
 
     Gas.drops.crud.create(Transform(pos, QuatEuler(0,0,0)))
 
-    if rdm() < 0.1 / regGetFloat('tool.pour.rate') then
+    if rdm() < 0.1 / regGetFloat('tool.pour.rate') and regGetBool('tool.soundOn') then
         sounds.play.drop(pos, 2)
     end
 
     SpawnParticle("smoke", pos, Vec(0,0,0), 0.5, 0.5, 0.5, 0.5)
 
+end
+
+--- Update drop values each frame.
+function Gas.drops.crud.updateDrop(drop)
+    drop.alpha = drop.timers.burn.time / drop.timers.burn.rpm
 end
 
 --- Mark a drop for removal to safely remove it near the end of the frame.
@@ -116,8 +126,10 @@ function Gas.drops.crud.removeMarkedDrops()
     for i = 1, #removeIndecies do
         table.remove(Gas.dropsList, removeIndecies[i])
     end
-
+    
 end
+
+
 
 
 
@@ -152,28 +164,34 @@ end
 
 function Gas.drops.physics.processVehicleExplosions(drop, explosionSize)
 
-    local explosiveVehicles = GetBool('savegame.mod.tool.gas.explosiveVehicles')
+    if regGetBool('tool.gas.explosiveVehicles') then
 
-    if explosiveVehicles then
-
+        -- Vehicle the drop is sticking to.
         local vehicle = GetBodyVehicle(GetShapeBody(drop.sticky.shape))
 
-        local explodedVehicle = false
-        for i = 1, #Gas.explodedVehicles do
-            if Gas.explodedVehicles[i] == vehicle then
-                explodedVehicle = true
-            end
-        end
+        if vehicle ~= 0 then -- Check if vehicle if it is valid.
 
-        if explodedVehicle == false and vehicle ~= 0 then
-            local pos = AabbGetBodyCenterPos(GetVehicleBody(vehicle))
-            Explosion(pos, explosionSize or 2)
-            table.insert(Gas.explodedVehicles, vehicle)
+            -- Check if vehicle has already been exploded by gas.
+            local explodedVehicle = false
+            for i = 1, #Gas.explodedVehicles do 
+                if Gas.explodedVehicles[i] == vehicle then
+                    explodedVehicle = true
+                end
+            end
+
+            -- Explode vehicle.
+            if explodedVehicle == false then
+                local pos = AabbGetBodyCenterPos(GetVehicleBody(vehicle))
+                Explosion(pos, explosionSize or 2)
+                table.insert(Gas.explodedVehicles, vehicle)
+            end
+
         end
 
     end
 
 end
+
 
 
 
@@ -244,8 +262,14 @@ end
 
 --- Burns a position and applies visual effects. Does not ignite drops.
 function Gas.drops.burn.burnPosition(pos)
-    local scale = regGetFloat('tool.gas.burnThickness')
-    local vecArea = VecScale(rdmVec(), scale)
+    local vecArea = VecScale(
+        Vec(
+            (math.random() - 0.5) * 2,
+            (math.random() - 0.5) * 2,
+            (math.random() - 0.5) * 2),
+
+        regGetFloat('tool.gas.burnThickness'))
+
     SpawnFire(VecAdd(pos, vecArea))
 end
 
@@ -322,22 +346,21 @@ Gas.drops.effects = {}
 
 function Gas.drops.effects.process()
 
-    if regGetBool('tool.gas.renderGasParticles') then
+        -- Render drops.
+    for i = 1, #Gas.dropsList do
 
-         -- Render drops.
-        for i = 1, #Gas.dropsList do
-
-            local drop = Gas.dropsList[i]
-
+        local drop = Gas.dropsList[i]
+        
+        if regGetBool('tool.gas.renderGasParticles') then
             Gas.drops.effects.renderDropIdle(drop.tr.pos) -- Idle drop
+        end
 
-            if drop.burn.isBurning then
-                Gas.drops.effects.renderDropBurning(drop.tr.pos) -- Burning drop
-            end
-
+        if drop.burn.isBurning then
+            Gas.drops.effects.renderDropBurning(drop.tr.pos) -- Burning drop
         end
 
     end
+
 
     -- Render drop projectiles.
     for i = 1, #projectiles do
@@ -369,7 +392,7 @@ function Gas.drops.effects.renderDropsIdleSimple()
 
                 do UiPush()
 
-                    UiColor(1,1,0, 0.6)
+                    UiColor(1,1,0, 0.5)
                     UiTranslate(dropPx, dropPy)
                     -- UiImage('ui/common/dot.png')
                     UiRect(s,s)

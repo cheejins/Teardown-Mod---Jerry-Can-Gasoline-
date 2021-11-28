@@ -176,7 +176,7 @@ function uiDrawOptionsContainer()
         UiFont('bold.ttf', font_normal * 1.5)
         UiAlign('top right')
 
-        local resetButton = UiTextButton('Reset')
+        local resetButton = UiTextButton('Reset Mod')
         if resetButton then
             modReset()
             beep()
@@ -243,22 +243,35 @@ options_tabs_render = {
 
         do UiPush()
 
-            ui.padding.create(500, 20)
+            ui.padding.create(100, 20)
 
-            ui.slider.create('Pour Gravity', 'tool.pour.gravity', nil, 0, 0.1)
-            ui.padding.create(0, 64)
+            do UiPush()
 
-            ui.slider.create('Pour RPM (Drops per second)', 'tool.pour.rate', 'RPM', 120, 2400)
-            ui.padding.create(0, 64)
+                ui.slider.create('Pour Gravity', 'tool.pour.gravity', nil, 0, 0.1)
+                ui.padding.create(0, 96)
 
-            ui.slider.create('Pour Velocity', 'tool.pour.velocity', 'm/s', 0.01, 0.5)
-            ui.padding.create(0, 64)
+                ui.slider.create('Pour RPM (Drops per second)', 'tool.pour.rate', 'RPM', 120, 2400)
+                ui.padding.create(0, 96)
 
-            ui.slider.create('Pour Spread', 'tool.pour.spread', nil, 0, 20)
-            ui.padding.create(0, 64)
+                ui.slider.create('Pour Velocity', 'tool.pour.velocity', 'm/s', 0.01, 0.5)
+                ui.padding.create(0, 96)
 
-            ui.checkBox.create('Debug Mode', 'tool.debugMode')
-            ui.padding.create(0, 64)
+                ui.slider.create('Pour Spread', 'tool.pour.spread', nil, 0, 20)
+                ui.padding.create(0, 96)
+
+            UiPop() end
+
+            do UiPush()
+
+                ui.padding.create(800, 0)
+
+                ui.checkBox.create('Sound', 'tool.soundOn')
+                ui.padding.create(0, 96)
+
+                ui.checkBox.create('Debug Mode', 'tool.debugMode')
+                ui.padding.create(0, 96)
+
+            UiPop() end
 
         UiPop() end
 
@@ -268,22 +281,38 @@ options_tabs_render = {
 
         do UiPush()
 
-            ui.padding.create(500, 20)
+            ui.padding.create(100, 20)
 
-            ui.slider.create('Minimum Ignition Distance', 'tool.gas.ignitionDistance', 'Meters', 1, 3)
-            ui.padding.create(0, 64)
+            do UiPush()
 
-            ui.slider.create('Ignition Delay', 'tool.gas.preburnTime', 'Seconds', 0, 3)
-            ui.padding.create(0, 64)
+                ui.slider.create('Minimum Distance To Ignite', 'tool.gas.ignitionDistance', 'Meters', 1, 5)
+                ui.padding.create(0, 96)
 
-            ui.slider.create('Burn Duration', 'tool.gas.burnTime', 'Seconds', 0, 60)
-            ui.padding.create(0, 64)
+                ui.slider.create('Ignition Delay', 'tool.gas.preburnTime', 'Seconds', 0, 3)
+                ui.padding.create(0, 96)
 
-            ui.slider.create('Burn Thickness', 'tool.gas.burnThickness', 'Meters', 0, 4)
-            ui.padding.create(0, 64)
+                ui.slider.create('Burn Duration', 'tool.gas.burnTime', 'Seconds', 0, 60)
+                ui.padding.create(0, 96)
 
-            ui.checkBox.create('Gas-covered vehicles become explosive', 'tool.gas.explosiveVehicles')
-            ui.padding.create(0, 64)
+                ui.slider.create('Burn Thickness', 'tool.gas.burnThickness', 'Meters', 0, 4)
+                ui.padding.create(0, 96)
+
+            UiPop() end
+
+            do UiPush()
+
+                ui.padding.create(800, 0)
+
+                ui.checkBox.create('Gas-covered vehicles become explosive', 'tool.gas.explosiveVehicles')
+                ui.padding.create(0, 96)
+                -- ui.padding.create(0, 32)
+
+                -- if regGetBool('tool.gas.explosiveVehicles') then
+                --     ui.slider.create('Explosion Delay', 'tool.gas.explosiveVehiclesDelay', 'Seconds', 0, 20)
+                -- end
+                -- ui.padding.create(0, 96)
+
+            UiPop() end
 
         UiPop() end
 
@@ -297,7 +326,7 @@ options_tabs_render = {
         -- UiText('(Performance options coming soon)')
 
 
-        ui.padding.create(500, 20)
+        ui.padding.create(100, 20)
 
         ui.checkBox.create('Ignition Fire Particles', 'tool.gas.ignitionFireParticles')
         ui.padding.create(0, 64)
@@ -468,7 +497,7 @@ function ui.slider.create(title, registryPath, valueText, min, max, w, h, fontSi
 
     -- Slider BG
     UiColor(0.4,0.4,0.4, 1)
-    local slW = w or 500
+    local slW = w or 400
     UiRect(slW, h or 10)
 
     -- Convert to slider scale.
@@ -511,8 +540,8 @@ function ui.checkBox.create(title, registryPath)
     -- Toggle BG
     UiAlign('left top')
     UiColor(0.4,0.4,0.4, 1)
-    local tglW = w or 150
-    local tglH = h or 50
+    local tglW = w or 140
+    local tglH = h or 40
     UiRect(tglW, h or tglH)
 
     -- Render toggle
