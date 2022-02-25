@@ -2,7 +2,10 @@
 
 projectiles = {}
 
-function initProjectiles()
+function manageProjectiles()
+
+    manageActiveProjs(projectiles)
+
     projPresets = {
         gasCan = {
             isActive = true, -- Active when firing, inactive after hit.
@@ -20,6 +23,8 @@ function initProjectiles()
             sound = nil,
         },
     }
+
+
 end
 
 --[[Projectiles]]

@@ -253,10 +253,10 @@ options_tabs_render = {
                 ui.slider.create('Pour RPM (Drops per second)', 'tool.pour.rate', 'RPM', 120, 2400)
                 ui.padding.create(0, 96)
 
-                ui.slider.create('Pour Velocity', 'tool.pour.velocity', 'm/s', 0.01, 0.5)
+                ui.slider.create('Pour Velocity', 'tool.pour.velocity', 'm/s', 0.01, 1)
                 ui.padding.create(0, 96)
 
-                ui.slider.create('Pour Spread', 'tool.pour.spread', nil, 0, 20)
+                ui.slider.create('Pour Spread', 'tool.pour.spread', nil, 0, 100)
                 ui.padding.create(0, 96)
 
             UiPop() end

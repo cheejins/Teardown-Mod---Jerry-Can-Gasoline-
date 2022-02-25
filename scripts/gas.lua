@@ -34,12 +34,23 @@ Gas.drops.crud = {}
 --- Create a drop object and store it in the list of drops.
 function Gas.drops.crud.create(tr)
 
+
+    local dropBody = nil
+    local spawnEntities = Spawn('MOD/prefab/gasDrop.xml', tr)
+    for key, e in pairs(spawnEntities) do
+        if GetEntityType(e) == "body" then
+            dropBody = e
+        end
+    end
+
+
     local drop = {
 
         id = #Gas.dropsList + 1,
         removeDrop = false, -- true = mark drop for removal/deletion.
 
         tr = tr,
+        body = dropBody,
         rad = 0.2,
 
         sticky = {
@@ -133,7 +144,6 @@ end
 
 
 
-
 Gas.drops.physics = {}
 
 ---Process the physics of a single drop.
@@ -154,6 +164,11 @@ function Gas.drops.physics.process(drop)
 
     end
 
+
+    -- Adhere drop body to drop tr
+    
+    SetBodyTransform(drop.body, drop.tr)
+
     -- Drop removal.
     drop.sticky.shapeMass = GetBodyMass(GetShapeBody(drop.sticky.shape))
 
@@ -173,7 +188,7 @@ function Gas.drops.physics.processVehicleExplosions(drop, explosionSize)
 
             -- Check if vehicle has already been exploded by gas.
             local explodedVehicle = false
-            for i = 1, #Gas.explodedVehicles do 
+            for i = 1, #Gas.explodedVehicles do
                 if Gas.explodedVehicles[i] == vehicle then
                     explodedVehicle = true
                 end
@@ -191,6 +206,15 @@ function Gas.drops.physics.processVehicleExplosions(drop, explosionSize)
     end
 
 end
+
+function Gas.drops.physics.queryRejectAllDrops()
+
+    for key, drop in pairs(Gas.dropsList) do
+        QueryRejectBody(drop.body)
+    end
+
+end
+
 
 
 
@@ -226,6 +250,7 @@ end
 function Gas.drops.physics.sticky.dripAndStick(drop)
 
     --> Check if drop is touching anything.
+    Gas.drops.physics.queryRejectAllDrops()
     local dropRcHit, point, normal, dropRcShape = QueryClosestPoint(drop.tr.pos, 0.2)
     if dropRcHit then
 
@@ -250,6 +275,8 @@ end
 
 
 
+
+
 Gas.drops.burn = {}
 
 --- Processes the burning of a drop.
@@ -262,15 +289,13 @@ end
 
 --- Burns a position and applies visual effects. Does not ignite drops.
 function Gas.drops.burn.burnPosition(pos)
-    local vecArea = VecScale(
-        Vec(
-            (math.random() - 0.5) * 2,
-            (math.random() - 0.5) * 2,
-            (math.random() - 0.5) * 2),
 
-        regGetFloat('tool.gas.burnThickness'))
+    for i = 1, 10 do
+        local vecArea = VecScale(Vec(math.random()-0.5, math.random()-0.5, math.random()-0.5), regGetFloat('tool.gas.burnThickness'))
+        SpawnFire(VecAdd(pos, vecArea))
+    end
 
-    SpawnFire(VecAdd(pos, vecArea))
+    SpawnFire(pos)
 end
 
 -- Burn after preBurn timer.
@@ -350,13 +375,14 @@ function Gas.drops.effects.process()
     for i = 1, #Gas.dropsList do
 
         local drop = Gas.dropsList[i]
-        
+        local dropBodyCenterPos = AabbGetBodyCenterPos(drop.body)
+
         if regGetBool('tool.gas.renderGasParticles') then
-            Gas.drops.effects.renderDropIdle(drop.tr.pos) -- Idle drop
+            Gas.drops.effects.renderDropIdle(dropBodyCenterPos) -- Idle drop
         end
 
         if drop.burn.isBurning then
-            Gas.drops.effects.renderDropBurning(drop.tr.pos) -- Burning drop
+            Gas.drops.effects.renderDropBurning(dropBodyCenterPos) -- Burning drop
         end
 
     end
@@ -454,7 +480,7 @@ function Gas.drops.effects.renderDropBurning(pos)
 
     if regGetBool('tool.gas.ignitionSmokeParticles') then -- options>>performance
         -- Smoke particles
-        local smokePos = VecAdd(pos, Vec(0,math.random() + 0.5,0))
+        local smokePos = VecAdd(pos, Vec(0,(math.random() + 0.5),0))
         SpawnParticle("darksmoke", smokePos, Vec(0, rdm(2, 3), rdm(1,2), rdm(0.5,1)), 0.5, 0.5, 0.5, 0.5)
     end
 

@@ -1,13 +1,14 @@
 #include "scripts/debug.lua"
 #include "scripts/gas.lua"
 #include "scripts/gun.lua"
+#include "scripts/kdTree.lua"
 #include "scripts/projectiles.lua"
 #include "scripts/registry.lua"
-#include "scripts/timers.lua"
 #include "scripts/sound.lua"
+#include "scripts/timers.lua"
 #include "scripts/tool.lua"
-#include "scripts/umf.lua"
 #include "scripts/ui.lua"
+#include "scripts/umf.lua"
 #include "scripts/utility.lua"
 
 ------------------------------------------------
@@ -25,20 +26,17 @@ function init()
     UI_GAME = false
     checkRegInitialized()
 
-    initDebug()
     initSounds()
-
-    tool.tool.init()
+    initDebug()
     initTimers()
-    initProjectiles()
+    tool.tool.init()
 
 end
-
 
 function tick()
 
     runTimers()
-    manageActiveProjs(projectiles)
+    manageProjectiles()
 
     tool.run()
     Gas.run()
@@ -49,6 +47,7 @@ end
 
 function draw()
 
+    -- Render drop particles.
     if not regGetBool('tool.gas.renderGasParticles') then
         Gas.drops.effects.renderDropsIdleSimple()
     end
@@ -57,9 +56,9 @@ function draw()
         uiDrawToolNameOptionsHint()
     end
 
+    -- Ui options screen.
     uiManageGameOptions()
 
 end
-
 
 UpdateQuickloadPatch()

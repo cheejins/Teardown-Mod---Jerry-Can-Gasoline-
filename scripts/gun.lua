@@ -20,7 +20,7 @@ Gun.actions = {
         local toolTr = TransformCopy(GetBodyTransform(GetToolBody()))
         toolTr.pos = TransformToParentPoint(toolTr, Vec(0.7,0.2,-1))
 
-        local spreadMult = math.random(0, regGetFloat('tool.pour.spread'))
+        local spreadMult = (math.random() - 0.5) * regGetFloat('tool.pour.spread')
         toolTr.rot = QuatRotateQuat(
             toolTr.rot, 
             QuatEuler(
@@ -41,14 +41,16 @@ Gun.actions = {
 
         local hit, pos = RaycastFromTransform(GetCameraTransform())
         if hit then
+
             -- Spawn a fire at the position of the drop.
-            Gas.drops.burn.burnPosition(pos)
+            SpawnFire(pos)
 
             for i = 1, 5 do
-                Gas.drops.burn.burnPosition(VecAdd(pos, VecScale(rdmVec(), 0.1)))
+                local vecArea = Vec(math.random()-0.5, math.random()-0.5, math.random()-0.5)
+                SpawnFire(VecAdd(pos, vecArea))
             end
 
-            for i = 1, 10 do
+            for i = 1, 4 do
                 Gas.drops.effects.renderDropBurning(pos)
             end
 

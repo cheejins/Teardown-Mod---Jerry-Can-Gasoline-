@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "..\\.utilities script"
+		},
+		{
+			"path": ".."
 		}
 	],
 	"settings": {

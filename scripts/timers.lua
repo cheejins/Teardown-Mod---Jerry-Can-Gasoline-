@@ -5,6 +5,8 @@ timer = {time, rpm}
 function runTimers()
     TimerRunTime(timers.gun.shoot)
     TimerRunTime(timers.gas.spread)
+
+    timers.gun.shoot.rpm = regGetFloat('tool.pour.rate')
 end
 
 function initTimers()
