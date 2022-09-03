@@ -6,6 +6,7 @@ tool = {
             didReset = function() return tool.tool.active() and InputPressed('r') end,
             igniteAtCrosshair = function() return tool.tool.active() and InputPressed('rmb') end,
             didReleaseDrops = function() return tool.tool.active() and InputPressed('g') end,
+            didIgniteAllDrops = function() return tool.tool.active() and InputPressed('mmb') end,
 
             isShooting = function() return tool.tool.active() and InputDown('lmb') end,
         },
@@ -32,19 +33,23 @@ tool = {
 function tool.run()
 
     if tool.tool.input.isShooting() then -- Shooting.
-        Gun.actions.shoot()
+        Gun_actions_shoot()
     end
 
     if tool.tool.input.igniteAtCrosshair() then
-        Gun.actions.igniteAtCrosshair()
+        Gun_actions_igniteAtCrosshair()
     end
 
     if tool.tool.input.didReset() then -- Pressed Reset.
-        Gun.actions.reset()
+        Gun_actions_reset()
     end
 
     if tool.tool.input.didReleaseDrops() then
-        Gun.actions.releaseDrops()
+        Gun_actions_releaseDrops()
+    end
+
+    if tool.tool.input.didIgniteAllDrops() then
+        Gun_actions_igniteAllDrops()
     end
 
 end

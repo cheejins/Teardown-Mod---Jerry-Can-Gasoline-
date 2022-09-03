@@ -1,0 +1,7 @@
+<prefab version="0.9.3">
+	<group open_="true" name="instance=MOD/prefab/gasDrop.xml" pos="0.0 0.0 0.0" rot="0.0 0.0 0.0">
+        <body tags='gasDrop' open_="true">
+            <vox open_="true" density="0" pos="0 0 0" rot="0.0 0.0 0.0" file="MOD/prefab/gasDrop.vox"></vox>
+        </body>
+	</group>
+</prefab>

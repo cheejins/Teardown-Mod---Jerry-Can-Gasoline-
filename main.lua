@@ -39,7 +39,7 @@ function tick()
     manageProjectiles()
 
     tool.run()
-    Gas.run()
+    Gas_run()
 
     debugMod()
 
@@ -49,7 +49,7 @@ function draw()
 
     -- Render drop particles.
     if not regGetBool('tool.gas.renderGasParticles') then
-        Gas.drops.effects.renderDropsIdleSimple()
+        Gas_drops_effects_renderDropsIdleSimple()
     end
 
     if tool.tool.active() then

@@ -85,7 +85,7 @@ function propelProj(proj)
         local hitPos = TransformToParentPoint(proj.transform, Vec(0,0,dist))
         proj.hit = true
 
-        Gas.drops.crud.spawn(hitPos)
+        Gas_drops_crud_spawn(hitPos)
 
     end
 
