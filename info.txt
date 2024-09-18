@@ -1,7 +1,7 @@
 name = Gas Can
 author = Cheejins
 description = [noupload]Go to the mod's options to play the demo map.
-tags = Map, Tool
+tags = Tool
 
 # Available tags (comma-separated):
 # Map      - A custom map with no particular gameplay

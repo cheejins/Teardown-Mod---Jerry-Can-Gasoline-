@@ -103,7 +103,8 @@ function propelProj(proj)
     end
 
     -- Move proj forward.
-    proj.transform.pos = TransformToParentPoint(proj.transform, Vec(0,0-proj.drop,-proj.speed))
+    proj.transform.pos = TransformToParentPoint(proj.transform, Vec(0,0,-proj.speed))
+    proj.transform.pos = VecAdd(proj.transform.pos, Vec(0,-proj.drop,0))
     proj.drop = proj.drop + proj.dropIncrement
 
 end

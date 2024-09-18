@@ -16,12 +16,13 @@
 --- By: Cheejins
 ------------------------------------------------
 
-CONFIG = {
-    soundEnabled = true,
-    slowMotion = false,
-}
 
 function init()
+
+    CONFIG = {
+        soundEnabled = true,
+        slowMotion = false,
+    }
 
     UI_GAME = false
     checkRegInitialized()
@@ -29,7 +30,7 @@ function init()
     initSounds()
     initDebug()
     initTimers()
-    tool.tool.init()
+    init_tool()
 
 end
 
@@ -61,4 +62,25 @@ function draw()
 
 end
 
-UpdateQuickloadPatch()
+
+function handleCommand(cmd) HandleQuickload(cmd) end
+function HandleQuickload(cmd)
+    for _, word in ipairs(splitString(cmd, " ")) do
+        if word == "quickload" then
+            init()
+        end
+        break
+    end
+end
+
+function splitString(str, delimiter)
+    local result = {}
+    for word in string.gmatch(str, '([^'..delimiter..']+)') do
+        result[#result+1] = trim(word)
+    end
+    return result
+end
+
+function trim(s)
+	return (s:gsub("^%s*(.-)%s*$", "%1"))
+ end
